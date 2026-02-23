@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Really Real Education</title>
+    <meta name="description" content="Read markdown-based blog posts that explain ideas with clarity and heart.">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="page">
+        <header class="site-header">
+            <div class="site-header-inner">
+                <div class="brand">
+                    <div class="brand-title">Really Real Education</div>
+                    <div class="brand-tagline">Short essays and study notes</div>
+                </div>
+                <nav class="site-nav">
+                    <a href="index.html">Home</a>
+                    <a href="books.html">Books</a>
+                    <a href="blog.html" aria-current="page">Blogs</a>
+                    <a href="articles.html">Journals</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container">
+            <section class="section">
+                <div class="section-head">
+                    <div>
+                        <h1 class="section-title">Latest insights</h1>
+                        <p class="section-desc">Each post lives in a markdown file so you can add new writing with ease.</p>
+                    </div>
+                </div>
+                <div class="blog-layout">
+                    <aside class="blog-list" id="blog-list"></aside>
+                    <article id="blog-content" class="blog-content">Loading markdown...</article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div>Want to contribute? Share your draft with the foundation team.</div>
+            <div class="footer-links">
+                <a href="https://jaltediyefoundation.org" target="_blank" rel="noopener noreferrer">Privacy &amp; Terms</a>
+                <a href="compliance.html">Compliance</a>
+            </div>
+            <div class="fine-print">External links open in a new tab.</div>
+        </footer>
+    </div>
+    <script src="js/vendor/marked.min.js"></script>
+    <script src="js/blog-parser.js"></script>
+</body>
+</html>
