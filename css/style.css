@@ -181,7 +181,7 @@ a {
 }
 
 .hero-title {
-  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-size: clamp(1.2rem, 3vw, 2.5rem);
   line-height: 1.1;
   margin: 12px 0 16px;
 }
@@ -618,6 +618,36 @@ a {
   font-weight: 500;
 }
 
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  transition: opacity 0.2s ease;
+}
+
+.social-link:hover {
+  opacity: 0.85;
+}
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.social-text-link {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
 .fine-print {
   font-size: 0.85rem;
   color: var(--muted);
@@ -730,7 +760,7 @@ a {
   }
 
   .hero-title {
-    font-size: 2.1rem;
+    font-size: 1.2rem;
   }
 
   .hero-actions {
