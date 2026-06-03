@@ -585,11 +585,9 @@ let S = { lat:28.6139, lon:77.2090, soil:"Clay-Loam", rainfall:"900mm", climate:
 function initCharts() {
   const chartCanvas = document.getElementById("projChart");
 
-  if (!chartCanvas) {
-    console.log("projChart canvas not found");
+ if (!chartCanvas) {
     return;
-  }
-
+}
   projChart = new Chart(chartCanvas,{
     type:"line",
     data:{
