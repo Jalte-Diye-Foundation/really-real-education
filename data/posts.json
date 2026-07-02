@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "The blueprint for a thriving future isn't etched in distant stars, but rooted in the soil beneath our feet and the air we breathe. Nurture them, and life will flourish.",
-    "date": "2026-06-30",
-    "excerpt": "Our collective destiny is intrinsically tied to the well-being of our planet's ecosystems. By embracing sustainable practices and advocating for environmental protection, we actively cultivate a resilient world where both nature and humanity can thrive for generations.",
+    "title": "Empowerment isn't about giving women a voice; it's about igniting the inextinguishable flame within them to speak their truth and illuminate the world.",
+    "date": "2026-07-01",
+    "excerpt": "Every woman carries a powerful, inherent light waiting to be fully unleashed. Our mission is to fan that inner flame, enabling her to not only find her own voice but also to courageously lead, inspire, and brightens the path for others.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
-    "theme": "Climate & Environment",
-    "hashtags": "#Cogentic #JalteDiyeFoundation #ClimateAction #Sustainability #EcoResponsibility",
+    "theme": "Women Empowerment",
+    "hashtags": "#Cogentic #JalteDiyeFoundation #WomenEmpowerment #Equality #Inspiration",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-02",
+    "title": "Daily Quote 183",
+    "date": "2026-07-02",
+    "excerpt": "Daily learning quote post #183.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_183.jpg",
+    "imageNumber": 183,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-02.html"
   },
   {
     "id": "post-2026-07-01",
