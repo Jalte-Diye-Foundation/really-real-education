@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
 <head>
   <title>Loading Volunteer Portal...</title>
@@ -13,13 +13,24 @@
   <h2>Waking up the volunteer portal...</h2>
   <p>This can take up to a minute on first load — thanks for your patience!</p>
   <div class="spinner"></div>
+  <noscript><p><a href="https://volunteer-application-portal.onrender.com">Click here if you're not redirected</a></p></noscript>
 
   <script>
     const targetUrl = "https://volunteer-application-portal.onrender.com";
+    let redirected = false;
 
-    fetch(targetUrl)
-      .then(() => window.location.href = targetUrl)
-      .catch(() => window.location.href = targetUrl); // redirect regardless after attempt
+    function goToPortal() {
+      if (!redirected) {
+        redirected = true;
+        window.location.href = targetUrl;
+      }
+    }
+
+    fetch(targetUrl, { mode: "no-cors" })
+      .then(goToPortal)
+      .catch(goToPortal);
+
+    setTimeout(goToPortal, 8000);
   </script>
 </body>
 </html>
