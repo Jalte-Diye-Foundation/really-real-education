@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "Peace is not the absence of sound, but the harmonious chorus of voices rising for justice, ensuring every heart can sing free.",
-    "date": "2026-07-04",
-    "excerpt": "True peace isn't found in silence when injustice prevails; it's forged in the active pursuit of equity and the dismantling of oppression. By championing fair systems and upholding the dignity of all, we cultivate a world where tranquility flourishes and every individual's well-being is genuinely celebrated.",
+    "title": "A woman's strength isn't just a ripple; it's the tide that lifts every boat in her harbor, transforming communities with its unwavering flow.",
+    "date": "2026-07-05",
+    "excerpt": "Her inherent power, once recognized and nurtured, becomes a force for collective progress and societal betterment. Empowering a woman means investing in a future where every individual thrives and dreams are realized.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
-    "theme": "Peace & Justice",
-    "hashtags": "#Cogentic #JalteDiyeFoundation #PeaceAndJustice #SocialCohesion #EthicalAI",
+    "theme": "Women Empowerment",
+    "hashtags": "#Cogentic #JalteDiyeFoundation #WomenEmpowerment #Equality #Inspiration",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-06",
+    "title": "Daily Quote 187",
+    "date": "2026-07-06",
+    "excerpt": "Daily learning quote post #187.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_187.jpg",
+    "imageNumber": 187,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-06.html"
   },
   {
     "id": "post-2026-07-05",
