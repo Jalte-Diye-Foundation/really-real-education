@@ -42,9 +42,7 @@
           <div class="projects-links">
             <a href="GVan.html">GVan</a>
             <a href="Cogentic.html">Quote of the Day</a>
-            <span class="project-coming-soon"
-              >Nurolab <span class="soon-tag">Coming soon</span></span
-            >
+            <a href="Nurolab.html">Nurolab</a>
           </div>
         </div>
       </div>
@@ -59,37 +57,48 @@
               </p>
             </div>
           </div>
-          <div class="journal-controls">
-            <div class="journal-list">
-              <button class="btn secondary" data-pdf="assets/pdfs/Shanti.pdf">
-                Peace
-              </button>
-              <button
-                class="btn secondary"
-                data-pdf="assets/pdfs/Rising_inequalities.pdf"
-              >
-                Rising Inequalities
-              </button>
-              <button
-                class="btn secondary"
-                data-pdf="assets/pdfs/Jalte_Diye.pdf"
-              >
-                Jalte Diye
-              </button>
-            </div>
-          </div>
-          <iframe
-            id="pdf-viewer"
-            style="
-              width: 100%;
-              height: 800px;
-              border: 1px solid rgba(31, 41, 51, 0.2);
-              border-radius: 18px;
-              background: #ffffff;
-              color-scheme: light;
-            "
-            referrerpolicy="no-referrer"
-          ></iframe>
+<div class="blog-layout">
+
+  <nav class="blog-nav">
+    <h3>Journal List</h3>
+
+    <ul>
+      <li>
+        <a href="#" class="active" data-pdf="assets/pdfs/Shanti.pdf">
+          Peace
+        </a>
+      </li>
+
+      <li>
+        <a href="#" data-pdf="assets/pdfs/Rising_inequalities.pdf">
+          Rising Inequalities
+        </a>
+      </li>
+
+      <li>
+        <a href="#" data-pdf="assets/pdfs/Jalte_Diye.pdf">
+          Jalte Diye
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="blog-content">
+    <iframe
+      id="pdf-viewer"
+      style="
+        width: 100%;
+        height: 800px;
+        border: 1px solid rgba(31, 41, 51, 0.2);
+        border-radius: 18px;
+        background: #ffffff;
+        color-scheme: light;
+      "
+      referrerpolicy="no-referrer"
+    ></iframe>
+  </div>
+
+</div>
         </section>
       </main>
 
@@ -180,10 +189,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <script>
       // Simple PDF viewer using browser's native PDF support
-      const pdfButtons = document.querySelectorAll("[data-pdf]");
+      const pdfLinks = document.querySelectorAll(".blog-nav a");
       const pdfViewer = document.getElementById("pdf-viewer");
       const getPdfFitUrl = (path) =>
-        `${path}#toolbar=0&navpanes=0&scrollbar=0&zoom=page-fit&view=FitH&pagemode=none`;
+        `${path}#toolbar=0&navpanes=0&scrollbar=0&zoom=page-width&pagemode=none`;
       const isFileProtocol = window.location.protocol === "file:";
 
       pdfViewer.style.backgroundColor = "#ffffff";
@@ -217,7 +226,7 @@
           ) {
             const page = await pdfDoc.getPage(pageNumber);
             const baseViewport = page.getViewport({ scale: 1 });
-            const scale = viewerWidth / baseViewport.width;
+            const scale = (viewerWidth - 20) / baseViewport.width;
             totalHeight += baseViewport.height * scale;
           }
 
@@ -237,31 +246,36 @@
         pdfViewer.src = getPdfFitUrl(path);
       };
 
-      pdfButtons.forEach((button, index) => {
-        button.addEventListener("click", async () => {
-          pdfButtons.forEach((btn) => btn.classList.remove("active"));
-          button.classList.add("active");
-          await loadPdf(button.dataset.pdf);
-        });
-        if (index === 0) {
-          button.classList.add("active");
-        }
-      });
+     pdfLinks.forEach((link, index) => {
+  link.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    pdfLinks.forEach((l) => l.classList.remove("active"));
+
+    link.classList.add("active");
+
+    await loadPdf(link.dataset.pdf);
+  });
+
+  if (index === 0) {
+    link.classList.add("active");
+  }
+});
 
       // Load first PDF on page load
-      if (pdfButtons.length > 0) {
-        loadPdf(pdfButtons[0].dataset.pdf);
+      if (pdfLinks.length > 0) {
+        loadPdf(pdfLinks[0].dataset.pdf);
       }
 
       let resizeTimeout;
       window.addEventListener("resize", () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-          const activeButton = document.querySelector(
-            ".journal-list .btn.active",
+          const activeLink = document.querySelector(
+            ".blog-nav a.active",
           );
-          if (activeButton) {
-            loadPdf(activeButton.dataset.pdf);
+          if (activeLink) {
+            loadPdf(activeLink.dataset.pdf);
           }
         }, 250);
       });
