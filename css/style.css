@@ -336,6 +336,27 @@ a {
   font-size: 0.9rem;
 }
 
+/* Hero panel variant used to showcase the Jalte Diye Foundation logo
+   in place of the "What you will find" pill list */
+.hero-logo-block {
+  display: flex;
+  flex-direction: column;   /* stacks logo above caption */
+  align-items: center;      /* centers caption under the logo */
+  justify-self: center;     /* centers the whole block within its hero grid column */
+  text-align: center;
+}
+
+.foundation-logo {
+  width: 100%;
+  max-width: 260px;   /* bigger than before (was 180px) */
+  height: auto;
+}
+
+.foundation-logo-caption {
+  margin-top: 20px;
+  max-width: 280px;
+}
+
 .section {
   margin-top: 80px;
 }
@@ -366,8 +387,8 @@ a {
 
 .section-desc {
   color: var(--muted);
-  max-width: 520px;
-  font-weight: 300;
+  max-width: 600px;
+  font-weight: 400;
 }
 
 .cards,
@@ -407,7 +428,7 @@ a {
 .card-meta {
   color: var(--muted);
   font-size: 0.95rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .stat-grid {
@@ -489,12 +510,12 @@ a {
 }
 
 .btn.secondary {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(102, 183, 160, 0.15);
   color: var(--ink);
-  border: 1px solid rgba(31, 41, 51, 0.15);
+  border: 1px ;
   box-shadow: none;
 }
-
+/*rgba(31, 41, 51, 0.15)*/
 .btn:hover,
 .btn.secondary:hover {
   transform: translateY(-5px);

@@ -260,6 +260,32 @@
         font-weight: 600;
         margin-left: 6px;
       }
+      .about-project-card {
+        background: white;
+        border: 1px solid #e2e0d6;
+        border-radius: 20px;
+        padding: 1.2rem 1.5rem;
+        margin-top: 1.2rem;
+        margin-bottom: 0.4rem;
+        width: 100%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      }
+      .about-project-title {
+        font-family: "Poppins", "Segoe UI", sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 0.5rem;
+      }
+      .about-project-desc {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+      .about-project-link {
+        text-decoration: none;
+      }
       .location-search {
         display: flex;
         gap: 0.5rem;
@@ -603,7 +629,7 @@
         </div>
         <nav class="site-nav">
           <a href="index.html">Home</a><a href="books.html">Books</a
-          ><a href="blog.html">Blogs</a><a href="articles.html">Journals</a>
+          ><a href="blog.html">Blogs</a><a href="articles.html">Journals</a><a href="waking-up.html">Apply to Volunteer</a>
         </nav>
       </div>
     </header>
@@ -622,6 +648,22 @@
     <div class="hero">
       <div class="hero-content">
         <h1>GVan - The <em>forestation</em> planner</h1>
+        <div class="about-project-card">
+          <h2 class="about-project-title">About the Project</h2>
+          <p class="about-project-desc" style="font-weight:bold">
+            GVan – Microforest Initiative: A nature restoration project using
+            the Miyawaki Method to grow dense, native forests in a fraction
+            of the time. It's how we turn small urban spaces into thriving,
+            self-sustaining ecosystems.
+          </p>
+          <a
+            class="btn-outline about-project-link"
+            href="https://github.com/Jalte-Diye-Foundation/GVan"
+            target="_blank"
+            rel="noopener noreferrer"
+            >View on GitHub</a
+          >
+        </div>
         <div class="hero-tools">
           <div class="location-search">
             <input
