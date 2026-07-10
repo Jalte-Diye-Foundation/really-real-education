@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "Your breath is the anchor; mindfulness, the current that guides your health to serenity.",
-    "date": "2026-07-08",
-    "excerpt": "By focusing on our breath, we root ourselves in the present moment, unlocking the profound connection between our mental state and physical well-being. This simple yet powerful act allows us to navigate life's currents with greater resilience and a healthier, more balanced self.",
+    "title": "Our foundation events are not merely gatherings; they are vibrant crucibles where shared compassion ignites collective action, illuminating paths to a brighter tomorrow.",
+    "date": "2026-07-09",
+    "excerpt": "Each Jalte Diye Foundation event is a beacon, bringing together hearts dedicated to a common purpose, transforming aspirations into tangible impact. It's where every handshake, every conversation, and every shared moment builds the foundation for a world brimming with hope and opportunity.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
-    "theme": "Health & Mindfulness",
-    "hashtags": "#Cogentic #JalteDiyeFoundation #Mindfulness #MentalWellbeing #HolisticHealth",
+    "theme": "Foundation Events",
+    "hashtags": "#Cogentic #JalteDiyeFoundation #CommunityImpact #SocialChange #Events",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-10",
+    "title": "Daily Quote 191",
+    "date": "2026-07-10",
+    "excerpt": "Daily learning quote post #191.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_191.jpg",
+    "imageNumber": 191,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-10.html"
   },
   {
     "id": "post-2026-07-09",
