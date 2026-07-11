@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "Our foundation events are not merely gatherings; they are vibrant crucibles where shared compassion ignites collective action, illuminating paths to a brighter tomorrow.",
-    "date": "2026-07-09",
-    "excerpt": "Each Jalte Diye Foundation event is a beacon, bringing together hearts dedicated to a common purpose, transforming aspirations into tangible impact. It's where every handshake, every conversation, and every shared moment builds the foundation for a world brimming with hope and opportunity.",
+    "title": "True vision is never limited to the eyes. The deepest sight lives in the fingertips and the heart.",
+    "date": "2026-07-10",
+    "excerpt": "Observing World Braille Day.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
     "theme": "Foundation Events",
-    "hashtags": "#Cogentic #JalteDiyeFoundation #CommunityImpact #SocialChange #Events",
+    "hashtags": "#Cogentic #JalteDiyeFoundation",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-11",
+    "title": "Daily Quote 192",
+    "date": "2026-07-11",
+    "excerpt": "Daily learning quote post #192.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_192.jpg",
+    "imageNumber": 192,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-11.html"
   },
   {
     "id": "post-2026-07-10",
