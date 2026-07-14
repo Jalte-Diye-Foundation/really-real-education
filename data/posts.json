@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "The mindful breath is the soul's anchor, securing our well-being in the present moment and transforming the body into a vibrant sanctuary of health and peace.",
-    "date": "2026-07-12",
-    "excerpt": "By consciously embracing the 'now,' we cultivate profound resilience, reduce stress, and ignite our body's natural capacity for healing and vitality. This daily practice deepens our connection to self, fostering a harmonious balance between mind, body, and spirit.",
+    "title": "Peace is not a fragile bloom protected from the storm, but a mighty tree whose roots of justice anchor it against all winds.",
+    "date": "2026-07-13",
+    "excerpt": "Lasting peace can never be a superficial calm; it must be built upon the unshakeable foundation of fairness, equity, and human rights. At Jalte Diye, we believe cultivating these deep roots of justice is the only path to a world where genuine tranquility can flourish for all.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
-    "theme": "Health & Mindfulness",
-    "hashtags": "#Cogentic #JalteDiyeFoundation #Mindfulness #MentalWellbeing #HolisticHealth",
+    "theme": "Peace & Justice",
+    "hashtags": "#Cogentic #JalteDiyeFoundation #PeaceAndJustice #SocialCohesion #EthicalAI",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-14",
+    "title": "Daily Quote 195",
+    "date": "2026-07-14",
+    "excerpt": "Daily learning quote post #195.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_195.jpg",
+    "imageNumber": 195,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-14.html"
   },
   {
     "id": "post-2026-07-13",
