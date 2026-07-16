@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "True peace is not merely the absence of conflict, but the vibrant presence of unwavering justice. It is the steady hand that builds dignity for all, making tranquility truly possible.",
-    "date": "2026-07-14",
-    "excerpt": "This reminds us that peace without justice is fragile and fleeting; grievances will always sow discord. The Jalte Diye Foundation actively works to establish equitable systems where everyone's dignity is honored, forging a peace that is both profound and enduring.",
+    "title": "Quality education isn't merely the transfer of knowledge; it's the profound ignition of curiosity, the precise sharpening of critical thought, and the courageous unfurling of wings for every child to soar towards their truest potential.",
+    "date": "2026-07-15",
+    "excerpt": "This transformative approach empowers individuals to not only comprehend the world but to actively and thoughtfully shape it. It cultivates the innovators, problem-solvers, and compassionate leaders essential for building a truly brighter, more equitable future.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
-    "theme": "Peace & Justice",
-    "hashtags": "#Cogentic #JalteDiyeFoundation #PeaceAndJustice #SocialCohesion #EthicalAI",
+    "theme": "Quality Education",
+    "hashtags": "#Cogentic #JalteDiyeFoundation",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-16",
+    "title": "Daily Quote 197",
+    "date": "2026-07-16",
+    "excerpt": "Daily learning quote post #197.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_197.jpg",
+    "imageNumber": 197,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-16.html"
   },
   {
     "id": "post-2026-07-15",
