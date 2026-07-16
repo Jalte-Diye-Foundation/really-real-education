@@ -935,32 +935,87 @@ a {
     font-size: 1.7rem;
   }
 
+  /* Compact sticky header on mobile: single row (title + horizontally
+     scrolling nav) instead of the stacked title/tagline/wrapped-nav
+     layout, which was eating too much of the viewport before any
+     content was visible. */
   .site-header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 14px 16px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 10px 16px;
     gap: 12px;
   }
 
+  .brand {
+    gap: 0;
+    min-width: 0; /* allows title to truncate instead of forcing header width */
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Tagline drops on mobile to save vertical space — the same
+     "initiative of Jalte Diye Foundation" framing is still present
+     in the hero copy directly below and in the footer. */
+  .brand-tagline {
+    display: none;
+  }
+
   .site-nav {
-    width: 100%;
+    width: auto;
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
   }
 
   .site-nav a {
-    padding: 8px 14px;
+    padding: 7px 14px;
+    font-size: 0.88rem;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   /* keep the Our Projects bar comfortable on small screens */
   .projects-bar-inner {
-    padding: 10px 16px;
-    gap: 10px;
+    padding: 8px 16px;
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .projects-bar-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .projects-label {
+    flex-shrink: 0;
+  }
+
+  .projects-links {
+    flex-wrap: nowrap;
   }
 
   .projects-links a,
   .project-coming-soon {
-    padding: 7px 14px;
+    padding: 6px 12px;
     font-size: 0.8rem;
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
   .hero {
@@ -997,14 +1052,13 @@ a {
 }
 
 @media (max-width: 480px) {
-  .site-nav {
-    width: 100%;
-    justify-content: flex-start;
+  .brand-title {
+    font-size: 0.95rem;
   }
 
   .site-nav a {
-    font-size: 0.92rem;
-    padding: 8px 12px;
+    font-size: 0.82rem;
+    padding: 6px 11px;
   }
 
   .hero-title {
