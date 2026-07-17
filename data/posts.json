@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "Quality education isn't merely the transfer of knowledge; it's the profound ignition of curiosity, the precise sharpening of critical thought, and the courageous unfurling of wings for every child to soar towards their truest potential.",
-    "date": "2026-07-15",
-    "excerpt": "This transformative approach empowers individuals to not only comprehend the world but to actively and thoughtfully shape it. It cultivates the innovators, problem-solvers, and compassionate leaders essential for building a truly brighter, more equitable future.",
+    "title": "Every Foundation event is a beacon, illuminating the path from shared intention to transformative action, built brick by brick by the hands of a united community.",
+    "date": "2026-07-16",
+    "excerpt": "These gatherings are vibrant platforms where our supporters unite, sharing laughter, stories, and a profound commitment to our mission. They are the vital turning points where collective energy transforms into tangible resources and heartfelt support, creating lasting change for countless lives.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
-    "theme": "Quality Education",
-    "hashtags": "#Cogentic #JalteDiyeFoundation",
+    "theme": "Foundation Events",
+    "hashtags": "#Cogentic #JalteDiyeFoundation #CommunityImpact #SocialChange #Events",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-17",
+    "title": "Daily Quote 198",
+    "date": "2026-07-17",
+    "excerpt": "Daily learning quote post #198.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_198.jpg",
+    "imageNumber": 198,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-17.html"
   },
   {
     "id": "post-2026-07-16",
