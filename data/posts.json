@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "Our foundation events are not merely gatherings; they are vibrant crucibles where shared compassion ignites collective action, illuminating paths to a brighter tomorrow.",
-    "date": "2026-07-09",
-    "excerpt": "Each Jalte Diye Foundation event is a beacon, bringing together hearts dedicated to a common purpose, transforming aspirations into tangible impact. It's where every handshake, every conversation, and every shared moment builds the foundation for a world brimming with hope and opportunity.",
+    "title": "Every drop of water is a drop of life.",
+    "date": "2026-07-17",
+    "excerpt": "There is no high civilisation without a clean river  guard your water as you guard your own blood.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
-    "theme": "Foundation Events",
-    "hashtags": "#Cogentic #JalteDiyeFoundation #CommunityImpact #SocialChange #Events",
+    "theme": "Climate & Environment",
+    "hashtags": "#Cogentic #JalteDiyeFoundation",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-18",
+    "title": "Daily Quote 199",
+    "date": "2026-07-18",
+    "excerpt": "Daily learning quote post #199.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_199.jpg",
+    "imageNumber": 199,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-18.html"
   },
   {
     "id": "post-2026-07-10",
