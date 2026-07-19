@@ -26,13 +26,20 @@
    Hero
    ========================================================================== */
 
+/* Pull the hero section closer to the projects bar above it (overrides
+   the generic .section top spacing from style.css for this page only) */
+#top.hero-section {
+  padding-top: 12px;
+  margin-top: 0;
+}
+
 .nurolab-hero {
   display: grid;
   grid-template-columns: 48% 52%;
   align-items: center;
-  gap: 70px;
   min-height: 85vh;
-  padding: 70px 0;
+  padding: 10px;
+  padding-top: 0;
 }
 
 .hero-left {
@@ -60,10 +67,10 @@
 }
 
 .hero-title {
-  font-size: clamp(3rem, 5vw, 4.8rem);
-  line-height: 1.05;
-  font-weight: 800;
-  margin-bottom: 22px;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .gradient-text {
@@ -110,10 +117,38 @@
 
 .brain-img {
   width: 100%;
-  max-width: 560px;
+  max-width: 380px;
   border-radius: 28px;
   display: block;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================================================
+   Headset showcase — full-width image below the hero, matching the
+   width of the .container (same as the About section content).
+   ========================================================================== */
+
+.headset-showcase {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.headset-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+@media (max-width: 768px) {
+  .headset-showcase {
+    margin-top: 30px;
+  }
+}
+
+.card-title{
+  font-weight:bold;
 }
 
 /* ==========================================================================
@@ -427,6 +462,7 @@
 
 .team-card .card-title {
   font-size: 1.1rem;
+  font-weight:bold;
 }
 
 /* ==========================================================================
