@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "Every drop of water is a drop of life.",
-    "date": "2026-07-17",
-    "excerpt": "There is no high civilisation without a clean river  guard your water as you guard your own blood.",
+    "title": "Empower a woman, and you ignite a beacon that illuminates not just her own path, but the future of her family, her community, and the world.",
+    "date": "2026-07-18",
+    "excerpt": "This truth underscores the profound ripple effect of investing in women. When a woman thrives, her capabilities cascade, fostering resilient families, vibrant communities, and a brighter, more equitable future for everyone.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
-    "theme": "Climate & Environment",
-    "hashtags": "#Cogentic #JalteDiyeFoundation",
+    "theme": "Women Empowerment",
+    "hashtags": "#Cogentic #JalteDiyeFoundation #WomenEmpowerment #Equality #Inspiration",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-19",
+    "title": "Daily Quote 200",
+    "date": "2026-07-19",
+    "excerpt": "Daily learning quote post #200.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_200.jpg",
+    "imageNumber": 200,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-19.html"
   },
   {
     "id": "post-2026-07-18",
