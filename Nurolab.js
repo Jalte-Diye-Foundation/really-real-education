@@ -205,7 +205,7 @@
         label: "1. Raw signal",
         caption: {
           h: "Signal straight from the headset",
-          p: "This is the unprocessed EEG — a mix of real brain activity, occasional eye blinks (the big spikes), and electrical noise.",
+          p: "This is the unprocessed EEG - a mix of real brain activity, occasional eye blinks (the big spikes), and electrical noise.",
         },
         wave: { noise: 0.9, hum: 0.35, drift: 0.5, blink: 1 },
       },
@@ -213,7 +213,7 @@
         label: "2. Blink removal",
         caption: {
           h: "Detecting and removing eye blinks",
-          p: "Blinks create large spikes in the front channels that aren't brain activity at all — they're muscle movement. Those spikes are detected and smoothly filled in.",
+          p: "Blinks create large spikes in the front channels that aren't brain activity at all - they're muscle movement. Those spikes are detected and smoothly filled in.",
         },
         wave: { noise: 0.9, hum: 0.35, drift: 0.5, blink: 0 },
       },
@@ -221,7 +221,7 @@
         label: "3. Bandpass filter",
         caption: {
           h: "Keeping only the useful range (0.1–70 Hz)",
-          p: "The slow drift and very fast noise are cut away — only the frequency range where real brain activity lives is kept.",
+          p: "The slow drift and very fast noise are cut away - only the frequency range where real brain activity lives is kept.",
         },
         wave: { noise: 0.35, hum: 0.35, drift: 0.05, blink: 0 },
       },
@@ -229,7 +229,7 @@
         label: "4. Notch filter",
         caption: {
           h: "Removing 50 Hz electrical interference",
-          p: "One specific frequency — the hum from AC power lines in the room — is surgically removed, leaving a clean signal.",
+          p: "One specific frequency - the hum from AC power lines in the room - is surgically removed, leaving a clean signal.",
         },
         wave: { noise: 0.35, hum: 0.02, drift: 0.05, blink: 0 },
       },
@@ -237,14 +237,14 @@
         label: "5. Feature extraction",
         caption: {
           h: "Measuring brainwave activity",
-          p: "Each band is a different speed of oscillation, shown to scale below — delta is slow and rolling, gamma is fast and tight. Taller waves mean that band is stronger right now.",
+          p: "Each band is a different speed of oscillation, shown to scale below - delta is slow and rolling, gamma is fast and tight. Taller waves mean that band is stronger right now.",
         },
         bars: [
-          { label: "Delta", desc: "deep sleep — slowest wave", freq: 1, power: 0.4 },
+          { label: "Delta", desc: "deep sleep - slowest wave", freq: 1, power: 0.4 },
           { label: "Theta", desc: "drowsy, daydreaming", freq: 2.2, power: 0.55 },
           { label: "Alpha", desc: "calm, relaxed", freq: 4, power: 0.85 },
           { label: "Beta", desc: "alert, thinking", freq: 7, power: 0.6 },
-          { label: "Gamma", desc: "intense focus — fastest wave", freq: 11, power: 0.45 },
+          { label: "Gamma", desc: "intense focus - fastest wave", freq: 11, power: 0.45 },
         ],
       },
       {
@@ -411,7 +411,7 @@
     buildNeuronSvg();
     initScrollReveal();
     initSmoothAnchors();
-    toast("Nurolab loaded — click a node to fire a signal");
+    toast("Nurolab loaded - click a node to fire a signal");
 
     // Initialize EEG Signal Simulation
     initEEGSimulation();
