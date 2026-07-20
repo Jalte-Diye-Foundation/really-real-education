@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "Empower a woman, and you ignite a beacon that illuminates not just her own path, but the future of her family, her community, and the world.",
-    "date": "2026-07-18",
-    "excerpt": "This truth underscores the profound ripple effect of investing in women. When a woman thrives, her capabilities cascade, fostering resilient families, vibrant communities, and a brighter, more equitable future for everyone.",
+    "title": "Justice is the seed from which lasting peace grows; without it, tranquility is but a mirage.",
+    "date": "2026-07-19",
+    "excerpt": "For too long, we've mistaken silence for peace, overlooking the simmering injustices that undermine true harmony. The Jalte Diye Foundation believes that only by rooting out inequality and upholding human rights can we cultivate a world where genuine, enduring peace can flourish for everyone.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
-    "theme": "Women Empowerment",
-    "hashtags": "#Cogentic #JalteDiyeFoundation #WomenEmpowerment #Equality #Inspiration",
+    "theme": "Peace & Justice",
+    "hashtags": "#Cogentic #JalteDiyeFoundation #PeaceAndJustice #SocialCohesion #EthicalAI",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-20",
+    "title": "Daily Quote 201",
+    "date": "2026-07-20",
+    "excerpt": "Daily learning quote post #201.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_201.jpg",
+    "imageNumber": 201,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-20.html"
   },
   {
     "id": "post-2026-07-19",
