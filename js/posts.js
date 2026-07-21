@@ -191,7 +191,7 @@
 
     // Update OG tags with the newest (first) post so page-level shares show today's image.
     updateOgTags(posts[0]);
-    posts[0].image = latestPoster;
+    
 
     feedContainer.innerHTML = posts
       .map((post) => {
@@ -199,13 +199,14 @@
           <article class="post-card" id="${escapeHtml(post.id)}">
              <img class="post-image"
 src="${escapeHtml(
-  post === posts[0] ? latestPoster : post.image
+  post.image
 )}"alt="${escapeHtml(post.title)}" loading="lazy">
             <div class="post-body">
-              <h2 class="post-title"><strong>Daily Quote</strong></h2>
-              <p class="card-meta"><strong>Daily Quote ${escapeHtml(String(getQuoteNumber(post)))}</strong></p>
+              <h2 class="post-title"><strong>${escapeHtml(post.title || `Daily Quote ${getQuoteNumber(post)}`)}</strong></h2>
+              ${post.theme ? `<p class="card-meta">Theme: ${escapeHtml(post.theme)}</p>` : ""}
               <p class="card-meta">Last updated: ${escapeHtml(formatDate(post.date))}</p>
               <p>${escapeHtml(post.excerpt)}</p>
+              ${post.hashtags ? `<p class="post-hashtags">${escapeHtml(post.hashtags)}</p>` : ""}
               <div class="post-actions">
                 <button class="btn secondary share-btn manual-share" type="button" data-platform="LinkedIn" data-post-id="${escapeHtml(post.id)}">Share on LinkedIn</button>
                 <button class="btn secondary share-btn manual-share" type="button" data-platform="X" data-post-id="${escapeHtml(post.id)}">Share on X</button>
