@@ -44,7 +44,8 @@ function getPostPermalink(post) {
 
 function renderPostPage(post) {
   const permalink = getPostPermalink(post);
-  const title = `Daily Quote ${post.imageNumber || ""} | Really Real Education`;
+  const fallbackTitle = `Daily Quote ${post.imageNumber || ""}`;
+  const title = `${post.title || fallbackTitle} | Really Real Education`;
   const description =
     post.excerpt || "Daily learning quote from Really Real Education.";
 
@@ -97,13 +98,15 @@ function renderPostPage(post) {
                     </div>
                     <a class="btn secondary" href="../Cogentic.html">Back to all posts</a>
                 </div>
-                <article class="post-card" id="${escapeHtml(post.id)}">
+              <article class="post-card" id="${escapeHtml(post.id)}">
                     <img class="post-image"
 src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" loading="eager">
                     <div class="post-body">
-                        <h2 class="post-title"><strong>Daily Quote ${escapeHtml(String(post.imageNumber || ""))}</strong></h2>
+                        <h2 class="post-title"><strong>${escapeHtml(post.title || fallbackTitle)}</strong></h2>
+                        ${post.theme ? `<p class="card-meta">Theme: ${escapeHtml(post.theme)}</p>` : ""}
                         <p class="card-meta">Last updated: ${escapeHtml(formatDate(post.date))}</p>
                         <p>${escapeHtml(description)}</p>
+                        ${post.hashtags ? `<p class="post-hashtags">${escapeHtml(post.hashtags)}</p>` : ""}
                     </div>
                 </article>
             </section>

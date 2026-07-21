@@ -8,11 +8,11 @@ const SITE_URL = process.env.SITE_URL || "https://reallyrealeducation.org";
 // "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main"
 const COGENTIC_REPO_RAW =
   process.env.COGENTIC_REPO_RAW ||
-  "https://raw.githubusercontent.com/vandana-hype/Cogentic/main";
+  "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main";
 
 const METADATA_URL = `${COGENTIC_REPO_RAW}/website_assets/latest/metadata.json`;
 const POSTER_URL = `${COGENTIC_REPO_RAW}/website_assets/latest/poster.jpg`;
-const COGENTIC_POST_ID = "post-cogentic-ai-daily";
+
 
 function readPosts() {
   if (!fs.existsSync(POSTS_PATH)) {
@@ -40,7 +40,7 @@ function buildPost(metadata) {
   const caption = (metadata.caption || "").trim();
 
   return {
-    id: COGENTIC_POST_ID,
+    
     title: quote || "AI Quote of the Day",
     date: metadata.date || new Date().toISOString().slice(0, 10),
     excerpt: explanation || caption || "Daily AI-generated quote from Cogentic.",
@@ -66,12 +66,19 @@ async function main() {
     return;
   }
 
-  const post = buildPost(metadata);
-  const posts = readPosts().filter((p) => p.id !== COGENTIC_POST_ID);
-  posts.unshift(post);
+ const post = buildPost(metadata);
+const posts = readPosts();
+const existing = posts.find((p) => p.date === post.date);
 
-  writePosts(posts);
+if (existing) {
+  Object.assign(existing, post, { id: existing.id, permalink: existing.permalink });
+  console.log(`Merged Cogentic AI content into existing post for ${post.date}.`);
+} else {
+  posts.unshift(post);
   console.log(`Synced Cogentic AI post for ${post.date}.`);
+}
+
+writePosts(posts);
 }
 
 main().catch((error) => {
