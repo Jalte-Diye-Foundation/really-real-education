@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "Justice is the seed from which lasting peace grows; without it, tranquility is but a mirage.",
-    "date": "2026-07-19",
-    "excerpt": "For too long, we've mistaken silence for peace, overlooking the simmering injustices that undermine true harmony. The Jalte Diye Foundation believes that only by rooting out inequality and upholding human rights can we cultivate a world where genuine, enduring peace can flourish for everyone.",
+    "title": "The best time to plant a tree was twenty years ago. The second best time is now.",
+    "date": "2026-07-20",
+    "excerpt": "Every small step we take today shapes the world we live in tomorrow.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
-    "theme": "Peace & Justice",
-    "hashtags": "#Cogentic #JalteDiyeFoundation #PeaceAndJustice #SocialCohesion #EthicalAI",
+    "theme": "Health & Mindfulness",
+    "hashtags": "#Cogentic #JalteDiyeFoundation",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-21",
+    "title": "Daily Quote 202",
+    "date": "2026-07-21",
+    "excerpt": "Daily learning quote post #202.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_202.jpg",
+    "imageNumber": 202,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-21.html"
   },
   {
     "id": "post-2026-07-20",
