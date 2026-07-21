@@ -40,7 +40,7 @@ function buildPost(metadata) {
   const caption = (metadata.caption || "").trim();
 
   return {
-    
+    id: `post-${metadata.date || new Date().toISOString().slice(0, 10)}`,
     title: quote || "AI Quote of the Day",
     date: metadata.date || new Date().toISOString().slice(0, 10),
     excerpt: explanation || caption || "Daily AI-generated quote from Cogentic.",
@@ -48,7 +48,7 @@ function buildPost(metadata) {
     source: metadata.source || "Cogentic AI",
     theme: metadata.theme || "",
     hashtags: metadata.hashtags || [],
-    permalink: `${SITE_URL}/posts/${COGENTIC_POST_ID}.html`
+    permalink: `${SITE_URL}/posts/post-${metadata.date || new Date().toISOString().slice(0, 10)}.html`
   };
 }
 
@@ -69,9 +69,18 @@ async function main() {
  const post = buildPost(metadata);
 const posts = readPosts();
 const existing = posts.find((p) => p.date === post.date);
-
 if (existing) {
-  Object.assign(existing, post, { id: existing.id, permalink: existing.permalink });
+  Object.assign(existing, post);
+
+  // Add missing id/permalink for older posts
+  if (!existing.id) {
+    existing.id = post.id;
+  }
+
+  if (!existing.permalink) {
+    existing.permalink = post.permalink;
+  }
+
   console.log(`Merged Cogentic AI content into existing post for ${post.date}.`);
 } else {
   posts.unshift(post);

@@ -93,8 +93,13 @@ function renderPostPage(post) {
             <section class="section">
                 <div class="section-head">
                     <div>
-                        <h1 class="section-title">Daily Quote</h1>
-                        <p class="section-desc">Quote ${escapeHtml(String(post.imageNumber || ""))}</p>
+                        <h1 class="section-title">${escapeHtml(post.title || fallbackTitle)}</h1>
+
+<p class="section-desc">
+    ${post.theme
+      ? escapeHtml(post.theme)
+      : "AI Generated Daily Quote"}
+</p>
                     </div>
                     <a class="btn secondary" href="../Cogentic.html">Back to all posts</a>
                 </div>
@@ -130,12 +135,12 @@ src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" loading="eager">
 function main() {
   const posts = readPosts();
   fs.mkdirSync(POSTS_DIR, { recursive: true });
+for (const post of posts) {
+  
 
-  for (const post of posts) {
-    const outputPath = path.join(POSTS_DIR, `${post.id}.html`);
-    fs.writeFileSync(outputPath, renderPostPage(post), "utf8");
-  }
-
+  const outputPath = path.join(POSTS_DIR, `${post.id}.html`);
+  fs.writeFileSync(outputPath, renderPostPage(post), "utf8");
+}
   console.log(`Generated ${posts.length} post pages.`);
 }
 
