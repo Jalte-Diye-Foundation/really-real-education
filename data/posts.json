@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "Our foundation events are not just dates on a calendar; they are beacons where hearts unite, purpose ignites, and the future begins to bloom.",
-    "date": "2026-07-21",
-    "excerpt": "At every Jalte Diye Foundation event, we witness the incredible power of community coming together, fueled by shared compassion and a vision for a better world. These gatherings are more than just occasions; they are vital opportunities where connections are forged, ideas blossom into action, and collective dreams start to take tangible shape.",
+    "title": "Health is not merely the absence of illness, but the vibrant presence of a mind in harmony with a body cared for with mindful grace.",
+    "date": "2026-07-22",
+    "excerpt": "Embracing mindfulness empowers us to listen deeply to our body's needs and nourish our mental landscape with intention. This conscious connection transforms daily habits into acts of self-love, fostering enduring well-being from within.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
-    "theme": "Foundation Events",
-    "hashtags": "#Cogentic #JalteDiyeFoundation #CommunityImpact #SocialChange #Events",
+    "theme": "Health & Mindfulness",
+    "hashtags": "#Cogentic #JalteDiyeFoundation #Mindfulness #MentalWellbeing #HolisticHealth",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-23",
+    "title": "Daily Quote 204",
+    "date": "2026-07-23",
+    "excerpt": "Daily learning quote post #204.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_204.jpg",
+    "imageNumber": 204,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-23.html"
   },
   {
     "id": "post-2026-07-22",
