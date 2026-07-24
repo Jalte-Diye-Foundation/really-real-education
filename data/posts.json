@@ -1,14 +1,41 @@
-[
+﻿[
   {
     "id": "post-cogentic-ai-daily",
     "title": "The best time to plant a tree was twenty years ago. The second best time is now.",
-    "date": "2026-07-20",
+    "date": "2026-07-23",
     "excerpt": "Every small step we take today shapes the world we live in tomorrow.",
     "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
     "theme": "Health & Mindfulness",
     "hashtags": "#Cogentic #JalteDiyeFoundation",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-24",
+    "title": "Daily Quote 205",
+    "date": "2026-07-24",
+    "excerpt": "Daily learning quote post #205.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_205.jpg",
+    "imageNumber": 205,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-24.html"
+  },
+  {
+    "id": "post-2026-07-23",
+    "title": "Daily Quote 204",
+    "date": "2026-07-23",
+    "excerpt": "Daily learning quote post #204.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_204.jpg",
+    "imageNumber": 204,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-23.html"
+  },
+  {
+    "id": "post-2026-07-22",
+    "title": "Daily Quote 203",
+    "date": "2026-07-22",
+    "excerpt": "Daily learning quote post #203.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_203.jpg",
+    "imageNumber": 203,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-22.html"
   },
   {
     "id": "post-2026-07-21",
@@ -45,6 +72,69 @@
     "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_199.jpg",
     "imageNumber": 199,
     "permalink": "https://reallyrealeducation.org/posts/post-2026-07-18.html"
+  },
+  {
+    "id": "post-2026-07-17",
+    "title": "Daily Quote 198",
+    "date": "2026-07-17",
+    "excerpt": "Daily learning quote post #198.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_198.jpg",
+    "imageNumber": 198,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-17.html"
+  },
+  {
+    "id": "post-2026-07-16",
+    "title": "Daily Quote 197",
+    "date": "2026-07-16",
+    "excerpt": "Daily learning quote post #197.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_197.jpg",
+    "imageNumber": 197,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-16.html"
+  },
+  {
+    "id": "post-2026-07-15",
+    "title": "Daily Quote 196",
+    "date": "2026-07-15",
+    "excerpt": "Daily learning quote post #196.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_196.jpg",
+    "imageNumber": 196,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-15.html"
+  },
+  {
+    "id": "post-2026-07-14",
+    "title": "Daily Quote 195",
+    "date": "2026-07-14",
+    "excerpt": "Daily learning quote post #195.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_195.jpg",
+    "imageNumber": 195,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-14.html"
+  },
+  {
+    "id": "post-2026-07-13",
+    "title": "Daily Quote 194",
+    "date": "2026-07-13",
+    "excerpt": "Daily learning quote post #194.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_194.jpg",
+    "imageNumber": 194,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-13.html"
+  },
+  {
+    "id": "post-2026-07-12",
+    "title": "Daily Quote 193",
+    "date": "2026-07-12",
+    "excerpt": "Daily learning quote post #193.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_193.jpg",
+    "imageNumber": 193,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-12.html"
+  },
+  {
+    "id": "post-2026-07-11",
+    "title": "Daily Quote 192",
+    "date": "2026-07-11",
+    "excerpt": "Daily learning quote post #192.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_192.jpg",
+    "imageNumber": 192,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-11.html"
   },
   {
     "id": "post-2026-07-10",
