@@ -1,14 +1,23 @@
 [
   {
     "id": "post-cogentic-ai-daily",
-    "title": "Health is not merely the absence of illness, but the vibrant presence of a mind in harmony with a body cared for with mindful grace.",
-    "date": "2026-07-22",
-    "excerpt": "Embracing mindfulness empowers us to listen deeply to our body's needs and nourish our mental landscape with intention. This conscious connection transforms daily habits into acts of self-love, fostering enduring well-being from within.",
+    "title": "The best time to plant a tree was twenty years ago. The second best time is now.",
+    "date": "2026-07-23",
+    "excerpt": "Every small step we take today shapes the world we live in tomorrow.",
     "image": "https://raw.githubusercontent.com/vandana-hype/Cogentic/main/website_assets/latest/poster.jpg",
     "source": "Cogentic AI",
     "theme": "Health & Mindfulness",
-    "hashtags": "#Cogentic #JalteDiyeFoundation #Mindfulness #MentalWellbeing #HolisticHealth",
+    "hashtags": "#Cogentic #JalteDiyeFoundation",
     "permalink": "https://reallyrealeducation.org/posts/post-cogentic-ai-daily.html"
+  },
+  {
+    "id": "post-2026-07-24",
+    "title": "Daily Quote 205",
+    "date": "2026-07-24",
+    "excerpt": "Daily learning quote post #205.",
+    "image": "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_205.jpg",
+    "imageNumber": 205,
+    "permalink": "https://reallyrealeducation.org/posts/post-2026-07-24.html"
   },
   {
     "id": "post-2026-07-23",
