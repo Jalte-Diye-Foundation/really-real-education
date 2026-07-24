@@ -38,6 +38,13 @@ function buildPost(metadata) {
   const quote = (metadata.quote || "").trim();
   const explanation = (metadata.explanation || "").trim();
   const caption = (metadata.caption || "").trim();
+  const dateStr = metadata.date || new Date().toISOString().slice(0, 10);
+
+  const postId =
+    metadata.id ||
+    `ai-${dateStr.replace(/-/g, "")}`;
+
+  const archivedImageUrl = `${COGENTIC_REPO_RAW}/website_assets/archive/${dateStr}/poster.jpg`;
 
   const postId =
     metadata.id ||
@@ -46,9 +53,9 @@ function buildPost(metadata) {
   return {
     id: postId,
     title: quote || "AI Quote of the Day",
-    date: metadata.date || new Date().toISOString().slice(0, 10),
+    date: dateStr,
     excerpt: explanation || caption || "Daily AI-generated quote from Cogentic.",
-    image: POSTER_URL,
+    image: archivedImageUrl,
     source: metadata.source || "Cogentic AI",
     theme: metadata.theme || "",
     hashtags: metadata.hashtags || [],
