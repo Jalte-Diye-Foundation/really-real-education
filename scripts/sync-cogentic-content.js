@@ -46,6 +46,10 @@ function buildPost(metadata) {
 
   const archivedImageUrl = `${COGENTIC_REPO_RAW}/website_assets/archive/${dateStr}/poster.jpg`;
 
+  const postId =
+    metadata.id ||
+    `ai-${(metadata.date || new Date().toISOString().slice(0, 10)).replace(/-/g, "")}`;
+
   return {
     id: postId,
     title: quote || "AI Quote of the Day",
