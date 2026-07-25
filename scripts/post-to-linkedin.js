@@ -31,7 +31,13 @@ function getLatestPost() {
 }
 
 function isAlreadyPosted(state, post) {
-  return state && state.postId === post.id;
+  if (!state) {
+    return false;
+  }
+  // Match on id OR date so a rerun/duplicate workflow trigger can
+  // never publish the same day's content twice, even if the post id
+  // scheme changes between the two scripts that create posts.
+  return state.postId === post.id || (Boolean(state.postDate) && state.postDate === post.date);
 }
 
 function buildShareText(post) {
