@@ -102,7 +102,7 @@ function renderPostPage(post) {
                     <img class="post-image"
 src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" loading="eager">
                     <div class="post-body">
-                        <h2 class="post-title"><strong>${escapeHtml(post.title || fallbackTitle)}</strong></h2>
+                        <h2 class="post-title">${escapeHtml(post.title || fallbackTitle)}</h2>
                         ${post.theme ? `<p class="card-meta">Theme: ${escapeHtml(post.theme)}</p>` : ""}
                         <p class="card-meta">Last updated: ${escapeHtml(formatDate(post.date))}</p>
                         <p>${escapeHtml(description)}</p>
