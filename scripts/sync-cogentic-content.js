@@ -11,8 +11,6 @@ const COGENTIC_REPO_RAW =
   "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main";
 
 const METADATA_URL = `${COGENTIC_REPO_RAW}/website_assets/latest/metadata.json`;
-const POSTER_URL = `${COGENTIC_REPO_RAW}/website_assets/latest/poster.jpg`;
-
 
 function readPosts() {
   if (!fs.existsSync(POSTS_PATH)) {
@@ -40,15 +38,12 @@ function buildPost(metadata) {
   const caption = (metadata.caption || "").trim();
   const dateStr = metadata.date || new Date().toISOString().slice(0, 10);
 
-  const postId =
-    metadata.id ||
-    `ai-${dateStr.replace(/-/g, "")}`;
+  // Single source of truth for the post id: always date-based, so
+  // daily-post.js (fallback) and this sync always agree on one id
+  // per calendar day instead of creating two separate entries.
+  const postId = `post-${dateStr}`;
 
   const archivedImageUrl = `${COGENTIC_REPO_RAW}/website_assets/archive/${dateStr}/poster.jpg`;
-
-  const postId =
-    metadata.id ||
-    `ai-${(metadata.date || new Date().toISOString().slice(0, 10)).replace(/-/g, "")}`;
 
   return {
     id: postId,
@@ -77,19 +72,23 @@ async function main() {
     return;
   }
 
- const post = buildPost(metadata);
-const posts = readPosts();
-const existing = posts.find((p) => p.date === post.date);
+  const post = buildPost(metadata);
+  const posts = readPosts();
 
-if (existing) {
-  Object.assign(existing, post, { id: existing.id, permalink: existing.permalink });
-  console.log(`Merged Cogentic AI content into existing post for ${post.date}.`);
-} else {
-  posts.unshift(post);
-  console.log(`Synced Cogentic AI post for ${post.date}.`);
-}
+  // Match by date OR by id so any pre-existing entry for today
+  // (e.g. one created earlier by the fallback script) is replaced
+  // instead of duplicated.
+  const existingIndex = posts.findIndex((p) => p.date === post.date || p.id === post.id);
 
-writePosts(posts);
+  if (existingIndex !== -1) {
+    posts[existingIndex] = { ...posts[existingIndex], ...post };
+    console.log(`Merged Cogentic AI content into existing post for ${post.date}.`);
+  } else {
+    posts.unshift(post);
+    console.log(`Synced Cogentic AI post for ${post.date}.`);
+  }
+
+  writePosts(posts);
 }
 
 main().catch((error) => {
