@@ -202,7 +202,7 @@ src="${escapeHtml(
   post.image
 )}"alt="${escapeHtml(post.title)}" loading="lazy">
             <div class="post-body">
-              <h2 class="post-title"><strong>${escapeHtml(post.title || `Daily Quote ${getQuoteNumber(post)}`)}</strong></h2>
+              <h2 class="post-title">${escapeHtml(post.title || `Daily Quote ${getQuoteNumber(post)}`)}</h2>
               ${post.theme ? `<p class="card-meta">Theme: ${escapeHtml(post.theme)}</p>` : ""}
               <p class="card-meta">Last updated: ${escapeHtml(formatDate(post.date))}</p>
               <p>${escapeHtml(post.excerpt)}</p>
