@@ -24,13 +24,17 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Generate daily post
-        run: node scripts/daily-post.js
+      # Sync runs FIRST: it pulls the real, event-aware quote + the
+      # background Cogentic actually rendered today.
+      - name: Sync Cogentic AI content
+        run: node scripts/sync-cogentic-content.js
         env:
           SITE_URL: https://reallyrealeducation.org
 
-      - name: Sync Cogentic AI content
-        run: node scripts/sync-cogentic-content.js
+      # Fallback/no-op safety check only — does not create a
+      # duplicate post from the old background set anymore.
+      - name: Fallback check for daily post
+        run: node scripts/daily-post.js
         env:
           SITE_URL: https://reallyrealeducation.org
 
