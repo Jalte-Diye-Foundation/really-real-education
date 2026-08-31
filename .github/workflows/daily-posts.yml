@@ -2,7 +2,8 @@ name: Daily Posts Feed
 
 on:
   schedule:
-    - cron: "50 3 * * *"
+    # Run after the Cogentic producer at 03:30 UTC, with time for queueing and publishing.
+    - cron: "30 4 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -28,13 +29,6 @@ jobs:
       # background Cogentic actually rendered today.
       - name: Sync Cogentic AI content
         run: node scripts/sync-cogentic-content.js
-        env:
-          SITE_URL: https://reallyrealeducation.org
-
-      # Fallback/no-op safety check only — does not create a
-      # duplicate post from the old background set anymore.
-      - name: Fallback check for daily post
-        run: node scripts/daily-post.js
         env:
           SITE_URL: https://reallyrealeducation.org
 

@@ -11,6 +11,8 @@ const COGENTIC_REPO_RAW =
   "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main";
 
 const METADATA_URL = `${COGENTIC_REPO_RAW}/website_assets/latest/metadata.json`;
+const MAX_FETCH_ATTEMPTS = 4;
+const FETCH_RETRY_DELAY_MS = 15_000;
 
 function readPosts() {
   if (!fs.existsSync(POSTS_PATH)) {
@@ -25,11 +27,47 @@ function writePosts(posts) {
 }
 
 async function fetchMetadata() {
-  const response = await fetch(METADATA_URL, { cache: "no-store" });
-  if (!response.ok) {
-    throw new Error(`Could not fetch Cogentic metadata.json: ${response.status}`);
+  let lastError;
+
+  for (let attempt = 1; attempt <= MAX_FETCH_ATTEMPTS; attempt += 1) {
+    try {
+      const response = await fetch(METADATA_URL, { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(`Could not fetch Cogentic metadata.json: ${response.status}`);
+      }
+      return response.json();
+    } catch (error) {
+      lastError = error;
+      if (attempt < MAX_FETCH_ATTEMPTS) {
+        await new Promise((resolve) => setTimeout(resolve, FETCH_RETRY_DELAY_MS));
+      }
+    }
   }
-  return response.json();
+
+  throw lastError;
+}
+
+function normalizeHashtags(hashtags) {
+  if (Array.isArray(hashtags)) {
+    return hashtags.filter(Boolean).join(" ");
+  }
+  return String(hashtags || "").trim();
+}
+
+function validateMetadata(metadata, expectedDate) {
+  if (!metadata || typeof metadata !== "object") {
+    throw new Error("Cogentic metadata.json must be a JSON object.");
+  }
+
+  if (metadata.date !== expectedDate) {
+    throw new Error(
+      `Cogentic metadata is for ${metadata.date || "an unknown date"}, expected ${expectedDate}.`
+    );
+  }
+
+  if (!String(metadata.quote || "").trim() && !String(metadata.explanation || "").trim()) {
+    throw new Error("Cogentic metadata.json has no quote or explanation.");
+  }
 }
 
 function buildPost(metadata) {
@@ -53,24 +91,15 @@ function buildPost(metadata) {
     image: archivedImageUrl,
     source: metadata.source || "Cogentic AI",
     theme: metadata.theme || "",
-    hashtags: metadata.hashtags || [],
+    hashtags: normalizeHashtags(metadata.hashtags),
     permalink: `${SITE_URL}/posts/${postId}.html`
   };
 }
 
 async function main() {
-  let metadata;
-  try {
-    metadata = await fetchMetadata();
-  } catch (error) {
-    console.log(`Skipping Cogentic sync: ${error.message}`);
-    return;
-  }
-
-  if (!metadata.quote && !metadata.explanation) {
-    console.log("Cogentic metadata.json has no quote/explanation yet — skipping sync for today.");
-    return;
-  }
+  const expectedDate = new Date().toISOString().slice(0, 10);
+  const metadata = await fetchMetadata();
+  validateMetadata(metadata, expectedDate);
 
   const post = buildPost(metadata);
   const posts = readPosts();

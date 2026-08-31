@@ -14,6 +14,10 @@ function escapeXml(value) {
     .replaceAll("'", "&apos;");
 }
 
+function escapeCdata(value) {
+  return String(value).replaceAll("]]>", "]]]]><![CDATA[>");
+}
+
 function readPosts() {
   if (!fs.existsSync(POSTS_PATH)) {
     return [];
@@ -27,7 +31,9 @@ function buildRss(posts) {
   const items = posts
     .map((post) => {
       const link = post.permalink || `${SITE_URL}/posts/${post.id}.html`;
-      const description = `${post.excerpt || ""} <img src="${post.image}" alt="${post.title}">`;
+      const description = escapeCdata(
+        `${post.excerpt || ""} <img src="${post.image}" alt="${post.title}">`
+      );
       return [
         "    <item>",
         `      <title>${escapeXml(post.title)}</title>`,

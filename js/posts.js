@@ -2,20 +2,9 @@
   const feedContainer = document.getElementById("posts-feed");
   const postsUrl = "data/posts.json";
   const latestPoster =
-  "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/website_assets/latest/poster.jpg";
-  // Fallback post: day-of-year image shown when posts.json cannot be fetched.
-  // Updated to day 101 = April 11 = quote_101.jpg
-  const fallbackPosts = [
-    {
-      id: "post-2026-04-11",
-      title: "Daily Quote 101",
-      date: "2026-04-11",
-      excerpt: "Daily learning quote post #101.",
-      image: "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_101.jpg",
-      imageNumber: 101,
-      permalink: "https://reallyrealeducation.org/posts/post-2026-04-11.html"
-    }
-  ];
+    "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/website_assets/latest/poster.jpg";
+  const latestMetadata =
+    "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/website_assets/latest/metadata.json";
 
   function escapeHtml(value) {
     return String(value)
@@ -49,6 +38,33 @@
 
   function getQuoteNumber(post) {
     return post.imageNumber || (post.title.match(/(\d+)/)?.[1] || "");
+  }
+
+  function normalizeHashtags(hashtags) {
+    return Array.isArray(hashtags) ? hashtags.join(" ") : String(hashtags || "");
+  }
+
+  async function loadLatestCogenticPost() {
+    const response = await fetch(latestMetadata, { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`Unable to load Cogentic metadata: ${response.status}`);
+    }
+
+    const metadata = await response.json();
+    if (!metadata.date || (!metadata.quote && !metadata.explanation)) {
+      throw new Error("Cogentic metadata is incomplete.");
+    }
+
+    return {
+      id: `post-${metadata.date}`,
+      title: metadata.quote || "AI Quote of the Day",
+      date: metadata.date,
+      excerpt: metadata.explanation || metadata.caption || "Daily AI-generated quote from Cogentic.",
+      image: latestPoster,
+      theme: metadata.theme || "",
+      hashtags: normalizeHashtags(metadata.hashtags),
+      permalink: `https://reallyrealeducation.org/posts/post-${metadata.date}.html`
+    };
   }
 
   function createQuoteMessage(post) {
@@ -246,9 +262,13 @@ src="${escapeHtml(
       posts.sort((a, b) => new Date(b.date) - new Date(a.date));
       renderPosts(posts);
     })
-    .catch((error) => {
-      // Local file previews and restrictive hosts can block JSON fetch; show the first quote post as fallback.
-      console.warn("Unable to load posts.json, using fallback post list.", error);
-      renderPosts(fallbackPosts);
+    .catch(async (error) => {
+      console.warn("Unable to load posts.json, loading the latest Cogentic post.", error);
+      try {
+        renderPosts([await loadLatestCogenticPost()]);
+      } catch (fallbackError) {
+        console.warn("Unable to load Cogentic fallback post.", fallbackError);
+        renderPosts([]);
+      }
     });
 })();
