@@ -2,7 +2,7 @@
   const feedContainer = document.getElementById("posts-feed");
   const postsUrl = "data/posts.json";
   const latestPoster =
-  "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/website_assets/latest/poster.jpg";
+    "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/website_assets/latest/poster.jpg";
   // Fallback post: day-of-year image shown when posts.json cannot be fetched.
   // Updated to day 101 = April 11 = quote_101.jpg
   const fallbackPosts = [
@@ -11,10 +11,11 @@
       title: "Daily Quote 101",
       date: "2026-04-11",
       excerpt: "Daily learning quote post #101.",
-      image: "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_101.jpg",
+      image:
+        "https://raw.githubusercontent.com/Jalte-Diye-Foundation/Cogentic/main/Background1/quote_101.jpg",
       imageNumber: 101,
-      permalink: "https://reallyrealeducation.org/posts/post-2026-04-11.html"
-    }
+      permalink: "https://reallyrealeducation.org/posts/post-2026-04-11.html",
+    },
   ];
 
   function escapeHtml(value) {
@@ -35,7 +36,7 @@
     return date.toLocaleDateString("en-IN", {
       year: "numeric",
       month: "long",
-      day: "numeric"
+      day: "numeric",
     });
   }
 
@@ -48,7 +49,7 @@
   }
 
   function getQuoteNumber(post) {
-    return post.imageNumber || (post.title.match(/(\d+)/)?.[1] || "");
+    return post.imageNumber || post.title.match(/(\d+)/)?.[1] || "";
   }
 
   function createQuoteMessage(post) {
@@ -59,13 +60,27 @@
       "",
       "If this resonates, share it with someone who needs it today.",
       "",
-      "#DailyQuote #WorldPeace  #Education #LifelongLearning #Wisdom #SelfGrowth #InnerPeace"
+      "#DailyQuote #WorldPeace  #Education #LifelongLearning #Wisdom #SelfGrowth #InnerPeace",
     ].join("\n");
   }
 
   // Caption used when a platform composer opens after image sharing/download.
   function createCaption(post) {
     return `${post.title}\n${post.excerpt}\n\n${createQuoteMessage(post)}\n\nReally Real Education — Jalte Diye Foundation`;
+  }
+
+  function getPlatformShareUrl(platform, post) {
+    const postUrl = getResolvedPostUrl(post);
+    const text = `${post.title}\n\n${post.excerpt}`;
+
+    const urls = {
+      LinkedIn: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`,
+      X: `https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(postUrl)}`,
+      Facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`,
+      WhatsApp: `https://wa.me/?text=${encodeURIComponent(`${text}\n\n${postUrl}`)}`,
+    };
+
+    return urls[platform];
   }
 
   // Update Open Graph and Twitter Card meta tags so the page preview shows today's image
@@ -76,11 +91,17 @@
       if (el) el.setAttribute("content", value);
     };
     set("og-title", `${post.title} — Really Real Education`);
-    set("og-description", post.excerpt || "Daily learning quote from Really Real Education.");
+    set(
+      "og-description",
+      post.excerpt || "Daily learning quote from Really Real Education.",
+    );
     set("og-image", post.image);
     set("og-url", getResolvedPostUrl(post));
     set("tw-title", `${post.title} — Really Real Education`);
-    set("tw-description", post.excerpt || "Daily learning quote from Really Real Education.");
+    set(
+      "tw-description",
+      post.excerpt || "Daily learning quote from Really Real Education.",
+    );
     set("tw-image", post.image);
     document.title = `${post.title} | Really Real Education`;
   }
@@ -112,7 +133,9 @@
     const mimeType = response.headers.get("content-type") || "image/jpeg";
     const imageBlob = await response.blob();
     const quoteNumber = String(getQuoteNumber(post) || "image");
-    const imageFile = new File([imageBlob], `quote-${quoteNumber}.jpg`, { type: mimeType });
+    const imageFile = new File([imageBlob], `quote-${quoteNumber}.jpg`, {
+      type: mimeType,
+    });
 
     if (!navigator.canShare({ files: [imageFile] })) {
       return false;
@@ -120,87 +143,45 @@
 
     await navigator.share({
       files: [imageFile],
-      text: createCaption(post)
+      title: `${post.title} | Really Real Education`,
+      text: createCaption(post),
+      url: getResolvedPostUrl(post),
     });
     return true;
   }
 
-  async function downloadPostImage(post) {
-    const response = await fetch(post.image);
-    if (!response.ok) {
-      throw new Error("Image download failed");
-    }
-
-    const imageBlob = await response.blob();
-    const quoteNumber = String(getQuoteNumber(post) || "image");
-    const extension = imageBlob.type === "image/png" ? "png" : "jpg";
-    const filename = `quote-${quoteNumber}.${extension}`;
-    const objectUrl = URL.createObjectURL(imageBlob);
-
-    const link = document.createElement("a");
-    link.href = objectUrl;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
-  }
-
-  function openPlatformComposer(platform) {
-    const urls = {
-      LinkedIn: "https://www.linkedin.com/feed/",
-      X: "https://x.com/compose/post",
-      Facebook: "https://www.facebook.com/",
-      Instagram: "https://www.instagram.com/",
-      YouTube: "https://studio.youtube.com/"
-    };
-
-    const url = urls[platform] || "https://www.linkedin.com/feed/";
-    window.open(url, "_blank", "noopener,noreferrer");
-  }
-
-  async function onManualShare(platform, post) {
-    const caption = createCaption(post);
-
+  async function onNativeShare(post) {
     try {
       const shared = await tryNativeImageShare(post);
       if (shared) {
         return;
       }
-    } catch {
-      // Fall back to download-and-open flow below when native share is unavailable.
+    } catch (error) {
+      if (error.name === "AbortError") {
+        return;
+      }
     }
 
-    Promise.all([downloadPostImage(post), copyTextToClipboard(caption)])
-      .then(() => {
-        alert(`Image downloaded and caption copied. Upload the image in ${platform} and paste the caption.`);
-        openPlatformComposer(platform);
-      })
-      .catch(() => {
-        alert(`Could not prepare image/caption automatically. Please save the image and post it manually on ${platform}.`);
-        openPlatformComposer(platform);
-      });
+    await copyTextToClipboard(getResolvedPostUrl(post));
+    alert("Post link copied.");
   }
 
   function renderPosts(posts) {
     if (!posts.length) {
-      feedContainer.innerHTML = '<article class="post-card"><p>No posts yet. The daily automation will add one shortly.</p></article>';
+      feedContainer.innerHTML =
+        '<article class="post-card"><p>No posts yet. The daily automation will add one shortly.</p></article>';
       return;
     }
 
     // Update OG tags with the newest (first) post so page-level shares show today's image.
     updateOgTags(posts[0]);
-    
 
     feedContainer.innerHTML = posts
       .map((post) => {
         return `
           <article class="post-card" id="${escapeHtml(post.id)}">
              <img class="post-image"
-src="${escapeHtml(
-  post.image
-)}"alt="${escapeHtml(post.title)}" loading="lazy">
+src="${escapeHtml(post.image)}"alt="${escapeHtml(post.title)}" loading="lazy">
             <div class="post-body">
               <h2 class="post-title">${escapeHtml(post.title || `Daily Quote ${getQuoteNumber(post)}`)}</h2>
               ${post.theme ? `<p class="card-meta">Theme: ${escapeHtml(post.theme)}</p>` : ""}
@@ -208,11 +189,12 @@ src="${escapeHtml(
               <p>${escapeHtml(post.excerpt)}</p>
               ${post.hashtags ? `<p class="post-hashtags">${escapeHtml(post.hashtags)}</p>` : ""}
               <div class="post-actions">
-                <button class="btn secondary share-btn manual-share" type="button" data-platform="LinkedIn" data-post-id="${escapeHtml(post.id)}">Share on LinkedIn</button>
-                <button class="btn secondary share-btn manual-share" type="button" data-platform="X" data-post-id="${escapeHtml(post.id)}">Share on X</button>
-                <button class="btn secondary share-btn manual-share" type="button" data-platform="Facebook" data-post-id="${escapeHtml(post.id)}">Share on Facebook</button>
-                <button class="btn secondary share-btn manual-share" type="button" data-platform="Instagram" data-post-id="${escapeHtml(post.id)}">Share on Instagram</button>
-                <button class="btn secondary share-btn manual-share" type="button" data-platform="YouTube" data-post-id="${escapeHtml(post.id)}">Share on YouTube</button>
+                <button class="btn secondary share-btn native-share" type="button" data-post-id="${escapeHtml(post.id)}">Share</button>
+                <a class="btn secondary share-btn" href="${escapeHtml(getPlatformShareUrl("LinkedIn", post))}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a class="btn secondary share-btn" href="${escapeHtml(getPlatformShareUrl("X", post))}" target="_blank" rel="noopener noreferrer">X</a>
+                <a class="btn secondary share-btn" href="${escapeHtml(getPlatformShareUrl("Facebook", post))}" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a class="btn secondary share-btn" href="${escapeHtml(getPlatformShareUrl("WhatsApp", post))}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                <button class="btn secondary share-btn copy-link" type="button" data-post-id="${escapeHtml(post.id)}">Copy link</button>
               </div>
             </div>
           </article>
@@ -221,16 +203,29 @@ src="${escapeHtml(
       .join("");
 
     const postById = Object.fromEntries(posts.map((post) => [post.id, post]));
-    const manualButtons = feedContainer.querySelectorAll(".manual-share");
-    manualButtons.forEach((button) => {
+    const nativeShareButtons = feedContainer.querySelectorAll(".native-share");
+    nativeShareButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        const platform = button.getAttribute("data-platform") || "Social";
         const postId = button.getAttribute("data-post-id") || "";
         const post = postById[postId];
         if (!post) {
           return;
         }
-        onManualShare(platform, post);
+        onNativeShare(post);
+      });
+    });
+
+    const copyLinkButtons = feedContainer.querySelectorAll(".copy-link");
+    copyLinkButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const postId = button.getAttribute("data-post-id") || "";
+        const post = postById[postId];
+        if (!post) {
+          return;
+        }
+        copyTextToClipboard(getResolvedPostUrl(post))
+          .then(() => alert("Post link copied."))
+          .catch(() => alert("Could not copy the post link."));
       });
     });
   }
@@ -248,7 +243,10 @@ src="${escapeHtml(
     })
     .catch((error) => {
       // Local file previews and restrictive hosts can block JSON fetch; show the first quote post as fallback.
-      console.warn("Unable to load posts.json, using fallback post list.", error);
+      console.warn(
+        "Unable to load posts.json, using fallback post list.",
+        error,
+      );
       renderPosts(fallbackPosts);
     });
 })();

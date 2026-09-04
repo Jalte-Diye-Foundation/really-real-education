@@ -16,6 +16,8 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="assets/images/our mission.png" type="image/png" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
       * {
@@ -76,119 +78,9 @@
           );
         line-height: 1.7;
       }
-      .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        background: rgba(248, 249, 250, 0.8);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(31, 41, 51, 0.08);
-      }
-      .site-header-inner {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 18px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-      }
-      .brand {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-      .brand-title {
-        font-size: 1.35rem;
-        font-weight: 700;
-      }
-      .brand-tagline {
-        font-size: 0.95rem;
-        color: var(--muted);
-        font-weight: 500;
-      }
       .brand-tagline a {
         color: inherit;
         text-decoration: none;
-      }
-      .site-nav {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-      .site-nav a {
-        font-weight: 500;
-        padding: 10px 18px;
-        border-radius: 999px;
-        border: 1px solid rgba(31, 41, 51, 0.12);
-        background: rgba(255, 255, 255, 0.7);
-        color: var(--ink);
-        text-decoration: none;
-        transition: var(--transition);
-      }
-      .site-nav a:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-soft);
-        background: rgba(255, 255, 255, 0.9);
-      }
-      .site-nav a[aria-current="page"] {
-        background: linear-gradient(
-          135deg,
-          rgba(102, 183, 160, 0.9),
-          rgba(102, 125, 183, 0.9)
-        );
-        color: white;
-        border-color: transparent;
-      }
-      .projects-bar {
-        background: rgba(102, 183, 160, 0.07);
-        border-bottom: 1px solid rgba(31, 41, 51, 0.08);
-      }
-      .projects-bar-inner {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 13px 24px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        flex-wrap: wrap;
-      }
-      .projects-label {
-        font-size: 0.78rem;
-        font-weight: 700;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        white-space: nowrap;
-      }
-      .projects-links {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-      .projects-links a {
-        font-weight: 500;
-        font-size: 0.85rem;
-        padding: 8px 16px;
-        border-radius: 999px;
-        border: 1px solid rgba(31, 41, 51, 0.12);
-        background: rgba(255, 255, 255, 0.8);
-        color: var(--ink);
-        text-decoration: none;
-        transition: var(--transition);
-      }
-      .projects-links a:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-soft);
-      }
-      .projects-links a[aria-current="page"] {
-        background: linear-gradient(
-          135deg,
-          rgba(102, 183, 160, 0.9),
-          rgba(102, 125, 183, 0.9)
-        );
-        color: white;
-        border-color: transparent;
       }
       .project-coming-soon {
         font-weight: 500;
@@ -236,10 +128,11 @@
       }
       .hero h1 {
         font-family: "Poppins", "Segoe UI", sans-serif;
-        font-size: clamp(2rem, 5vw, 3.2rem);
-        font-weight: 900;
+        font-size: 1.9rem;
+        font-weight: 700;
         color: var(--ink);
         line-height: 1.1;
+        margin: 12px 0 16px;
         white-space: nowrap;
       }
       .hero h1 em {
@@ -250,9 +143,11 @@
         display: flex;
         gap: 0.5rem;
         justify-content: flex-start;
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
         margin-top: 1.2rem;
+        max-width: 100%;
       }
       .hero-tools-or {
         font-size: 0.8rem;
@@ -292,7 +187,8 @@
         align-items: center;
         background: white;
         height: 36px;
-        min-width: 224px;
+        min-width: 0;
+        flex: 1 1 224px;
         padding: 0 4px 0 12px;
         border-radius: 999px;
         border: 1px solid #d6e0cc;
@@ -304,7 +200,9 @@
         font-size: 0.9rem;
         outline: none;
         background: transparent;
-        width: 160px;
+        width: auto;
+        min-width: 0;
+        flex: 1 1 auto;
       }
       .location-search button,
       .site-nav-detect,
@@ -324,7 +222,7 @@
         font-weight: 500;
       }
       .site-nav-detect {
-        min-width: 224px;
+        flex: 0 1 auto;
         padding: 0 12px;
         white-space: nowrap;
       }
@@ -608,9 +506,75 @@
         .resource-grid {
           grid-template-columns: 1fr;
         }
+        .hero-content {
+          width: 100%;
+          min-width: 0;
+          margin: 0;
+        }
+        .hero {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .hero h1 {
+          white-space: normal;
+        }
         .site-header-inner {
           flex-direction: column;
-          align-items: flex-start;
+          align-items: stretch;
+          padding: 10px 16px;
+          gap: 8px;
+        }
+        .brand {
+          gap: 0;
+        }
+        .brand-title {
+          font-size: 1.05rem;
+        }
+        .brand-tagline {
+          font-size: 0.78rem;
+          line-height: 1.35;
+        }
+        .site-nav {
+          width: 100%;
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 6px;
+        }
+        .site-nav a {
+          padding: 6px 4px;
+          font-size: 0.82rem;
+          text-align: center;
+        }
+        .projects-bar-inner {
+          padding: 8px 16px;
+          gap: 8px;
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .projects-label {
+          text-align: center;
+        }
+        .projects-links {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 6px;
+        }
+        .projects-links a,
+        .project-coming-soon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 36px;
+          padding: 6px 4px;
+          font-size: 0.82rem;
+          text-align: center;
+          white-space: normal;
+        }
+        .hero-tools {
+          gap: 0.35rem;
+        }
+        .site-nav-detect {
+          padding: 0 8px;
+          font-size: 0.78rem;
         }
       }
     </style>
@@ -629,7 +593,7 @@
         </div>
         <nav class="site-nav">
           <a href="index.html">Home</a><a href="books.html">Books</a
-          ><a href="blog.html">Blogs</a><a href="articles.html">Journals</a><a href="waking-up.html">Apply to Volunteer</a>
+          ><a href="blog.html">Blogs</a><a href="waking-up.html">Apply</a>
         </nav>
       </div>
     </header>
@@ -638,7 +602,7 @@
         <span class="projects-label">Our Projects</span>
         <div class="projects-links">
           <a href="GVan.html" aria-current="page">GVan</a
-          ><a href="Cogentic.html">Quote of the Day</a
+          ><a href="Cogentic.html">Cogentic</a
           ><a href="Nurolab.html">Nurolab</a>
         </div>
       </div>
@@ -648,10 +612,10 @@
         <h1>GVan - The <em>forestation</em> planner</h1>
         <div class="about-project-card">
           <h2 class="about-project-title">About the Project</h2>
-          <p class="about-project-desc" style="font-weight:bold">
+          <p class="about-project-desc">
             GVan – Microforest Initiative: A nature restoration project using
-            the Miyawaki Method to grow dense, native forests in a fraction
-            of the time. It's how we turn small urban spaces into thriving,
+            the Miyawaki Method to grow dense, native forests in a fraction of
+            the time. It's how we turn small urban spaces into thriving,
             self-sustaining ecosystems.
           </p>
           <a
