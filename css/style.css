@@ -687,6 +687,38 @@ a {
   font-weight: 300;
 }
 
+.post-excerpt {
+  font-weight: 500;
+  margin-top: 8px;
+  color: var(--ink);
+}
+
+.post-long-explanation-block {
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: rgba(102, 183, 160, 0.06);
+  border-left: 3px solid var(--green);
+  border-radius: var(--radius-sm);
+  font-size: 0.93rem;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.post-long-explanation {
+  margin-bottom: 8px;
+}
+
+.post-long-explanation:last-child {
+  margin-bottom: 0;
+}
+
+.post-hashtags {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--blue);
+  font-weight: 500;
+}
+
 .post-actions {
   margin-top: 14px;
   display: flex;

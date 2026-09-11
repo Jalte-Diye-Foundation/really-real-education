@@ -178,6 +178,10 @@
 
     feedContainer.innerHTML = posts
       .map((post) => {
+        const hashtagsText = Array.isArray(post.hashtags) ? post.hashtags.join(" ") : (post.hashtags || "");
+        const formattedLongExplanation = post.long_explanation
+          ? escapeHtml(post.long_explanation).replace(/\n\n/g, "</p><p class=\"post-long-explanation\">").replace(/\n/g, "<br>")
+          : "";
         return `
           <article class="post-card" id="${escapeHtml(post.id)}">
              <img class="post-image"
@@ -186,8 +190,9 @@ src="${escapeHtml(post.image)}"alt="${escapeHtml(post.title)}" loading="lazy">
               <h2 class="post-title">${escapeHtml(post.title || `Daily Quote ${getQuoteNumber(post)}`)}</h2>
               ${post.theme ? `<p class="card-meta">Theme: ${escapeHtml(post.theme)}</p>` : ""}
               <p class="card-meta">Last updated: ${escapeHtml(formatDate(post.date))}</p>
-              <p>${escapeHtml(post.excerpt)}</p>
-              ${post.hashtags ? `<p class="post-hashtags">${escapeHtml(post.hashtags)}</p>` : ""}
+              <p class="post-excerpt">${escapeHtml(post.excerpt)}</p>
+              ${formattedLongExplanation ? `<div class="post-long-explanation-block"><p class="post-long-explanation">${formattedLongExplanation}</p></div>` : ""}
+              ${hashtagsText ? `<p class="post-hashtags">${escapeHtml(hashtagsText)}</p>` : ""}
               <div class="post-actions">
                 <button class="btn secondary share-btn native-share" type="button" data-post-id="${escapeHtml(post.id)}">Share</button>
                 <a class="btn secondary share-btn" href="${escapeHtml(getPlatformShareUrl("LinkedIn", post))}" target="_blank" rel="noopener noreferrer">LinkedIn</a>

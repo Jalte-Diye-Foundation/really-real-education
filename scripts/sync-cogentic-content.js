@@ -35,6 +35,7 @@ async function fetchMetadata() {
 function buildPost(metadata) {
   const quote = (metadata.quote || "").trim();
   const explanation = (metadata.explanation || "").trim();
+  const longExplanation = (metadata.long_explanation || "").trim();
   const caption = (metadata.caption || "").trim();
   const dateStr = metadata.date || new Date().toISOString().slice(0, 10);
 
@@ -50,6 +51,7 @@ function buildPost(metadata) {
     title: quote || "AI Quote of the Day",
     date: dateStr,
     excerpt: explanation || caption || "Daily AI-generated quote from Cogentic.",
+    long_explanation: longExplanation,
     image: archivedImageUrl,
     source: metadata.source || "Cogentic AI",
     theme: metadata.theme || "",

@@ -48,6 +48,10 @@ function renderPostPage(post) {
   const title = `${post.title || fallbackTitle} | Really Real Education`;
   const description =
     post.excerpt || "Daily learning quote from Really Real Education.";
+  const hashtagsText = Array.isArray(post.hashtags) ? post.hashtags.join(" ") : (post.hashtags || "");
+  const formattedLongExplanation = post.long_explanation
+    ? escapeHtml(post.long_explanation).replace(/\n\n/g, "</p><p class=\"post-long-explanation\">").replace(/\n/g, "<br>")
+    : "";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -115,8 +119,9 @@ src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" loading="eager">
                         <h2 class="post-title">${escapeHtml(post.title || fallbackTitle)}</h2>
                         ${post.theme ? `<p class="card-meta">Theme: ${escapeHtml(post.theme)}</p>` : ""}
                         <p class="card-meta">Last updated: ${escapeHtml(formatDate(post.date))}</p>
-                        <p>${escapeHtml(description)}</p>
-                        ${post.hashtags ? `<p class="post-hashtags">${escapeHtml(post.hashtags)}</p>` : ""}
+                        <p class="post-excerpt">${escapeHtml(description)}</p>
+                        ${formattedLongExplanation ? `<div class="post-long-explanation-block"><p class="post-long-explanation">${formattedLongExplanation}</p></div>` : ""}
+                        ${hashtagsText ? `<p class="post-hashtags">${escapeHtml(hashtagsText)}</p>` : ""}
                     </div>
                 </article>
             </section>
