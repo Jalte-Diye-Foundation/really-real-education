@@ -55,6 +55,8 @@ function buildPost(metadata) {
     image: archivedImageUrl,
     source: metadata.source || "Cogentic AI",
     theme: metadata.theme || "",
+    event_name: metadata.event_name !== undefined ? metadata.event_name : (metadata.event || undefined),
+    event: metadata.event || null,
     hashtags: metadata.hashtags || [],
     permalink: `${SITE_URL}/posts/${postId}.html`
   };

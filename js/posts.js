@@ -48,6 +48,17 @@
     return post.permalink || getPostUrl(post.id);
   }
 
+    function isMeaningfulEvent(eventName) {
+    if (!eventName) return false;
+    const clean = String(eventName).trim();
+    if (!clean) return false;
+    const lower = clean.toLowerCase();
+    if (lower === "general awareness" || lower === "none" || lower === "null" || lower === "undefined") {
+      return false;
+    }
+    return true;
+  }
+
   function getQuoteNumber(post) {
     return post.imageNumber || post.title.match(/(\d+)/)?.[1] || "";
   }
@@ -189,6 +200,7 @@ src="${escapeHtml(post.image)}"alt="${escapeHtml(post.title)}" loading="lazy">
             <div class="post-body">
               <h2 class="post-title">${escapeHtml(post.title || `Daily Quote ${getQuoteNumber(post)}`)}</h2>
               ${post.theme ? `<p class="card-meta">Theme: ${escapeHtml(post.theme)}</p>` : ""}
+              ${isMeaningfulEvent(post.event_name || post.event) ? `<p class="card-meta">Event: ${escapeHtml(String(post.event_name || post.event).trim())}</p>` : ""}
               <p class="card-meta">Last updated: ${escapeHtml(formatDate(post.date))}</p>
               <p class="post-excerpt">${escapeHtml(post.excerpt)}</p>
               ${formattedLongExplanation ? `<div class="post-long-explanation-block"><p class="post-long-explanation">${formattedLongExplanation}</p></div>` : ""}
