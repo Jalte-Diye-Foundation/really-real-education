@@ -12,13 +12,8 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" href="assets/images/our mission.png" type="image/png" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
       * {
         margin: 0;
@@ -305,13 +300,6 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1.2rem;
-      }
-      #map {
-        height: 320px;
-        width: 100%;
-        border-radius: 20px;
-        z-index: 1;
-        border: 1px solid #d6dccc;
       }
       .miyawaki-card,
       .resource-card {
@@ -664,14 +652,7 @@
             ><span id="locStatus"
               >Using default India • click detect or search</span
             ></span
-          ><span class="section-subtext"
-            >Click the map area to select a location for your future
-            forest</span
           >
-        </div>
-        <div class="card">
-          <div class="card-header">Location & Boundaries</div>
-          <div id="map" style="height: 320px"></div>
         </div>
       </div>
 
@@ -1848,9 +1829,7 @@
           return lon < 77.5 ? "western_ghats_coastal" : "south_deccan_plateau";
         return "north_central_arid_plains";
       }
-      let map,
-        marker,
-        currentCoords = { lat: 28.6139, lng: 77.209 },
+      let currentCoords = { lat: 28.6139, lng: 77.209 },
         polyPoints = [],
         polyClosed = false,
         drawModeActive = true,
@@ -2090,27 +2069,41 @@
           `<div>Total water for 2‑year establishment: <strong>${Math.round(totalTwoYearsL / 1000)} m³</strong> (approx. ₹${waterCost.toLocaleString()})</div><div style="font-size:0.7rem;">Based on climate zone, soil type, and daily irrigation for 2 years.</div>`;
         updateFullBudget();
       }
-      function initMap() {
-        map = L.map("map").setView([currentCoords.lat, currentCoords.lng], 12);
-        L.tileLayer(
-          "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-        ).addTo(map);
-        marker = L.marker([currentCoords.lat, currentCoords.lng]).addTo(map);
-        map.on("click", (e) => {
-          currentCoords = e.latlng;
-          marker.setLatLng(currentCoords);
-          updateCoordInputs();
-          toast("Coordinates updated");
-          if (document.getElementById("mw-results").style.display === "block")
-            analyzeSite();
-        });
+      let reverseLookupId = 0;
+      async function updateAreaName() {
+        const lookupId = ++reverseLookupId;
+        const status = document.getElementById("locStatus");
+        const coordsText = `${currentCoords.lat.toFixed(4)}, ${currentCoords.lng.toFixed(4)}`;
+        status.textContent = ` ${coordsText}`;
+        try {
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=10&lat=${currentCoords.lat}&lon=${currentCoords.lng}`,
+          );
+          if (!res.ok) throw new Error(`Reverse lookup failed: ${res.status}`);
+          const data = await res.json();
+          if (lookupId !== reverseLookupId) return;
+          const address = data.address || {};
+          const name = [
+            address.city ||
+              address.town ||
+              address.village ||
+              address.county ||
+              address.suburb,
+            address.state_district || address.state,
+          ]
+            .filter(Boolean)
+            .filter((part, index, parts) => parts.indexOf(part) === index)
+            .join(", ");
+          status.textContent = ` ${name || data.display_name || coordsText}`;
+        } catch (error) {
+          console.error(error);
+        }
       }
       function updateCoordInputs() {
         document.getElementById("mw-lat").value = currentCoords.lat.toFixed(6);
         document.getElementById("mw-lon").value = currentCoords.lng.toFixed(6);
-        document.getElementById("locStatus").innerHTML =
-          ` ${currentCoords.lat.toFixed(4)}, ${currentCoords.lng.toFixed(4)}`;
         document.getElementById("locDot").style.background = "#2ecc71";
+        updateAreaName();
       }
       async function searchLocation() {
         let q = document.getElementById("locationInput").value;
@@ -2124,8 +2117,6 @@
             lat: parseFloat(d[0].lat),
             lng: parseFloat(d[0].lon),
           };
-          map.setView([currentCoords.lat, currentCoords.lng], 12);
-          marker.setLatLng(currentCoords);
           updateCoordInputs();
           toast("Location found");
           if (document.getElementById("mw-results").style.display === "block")
@@ -2136,8 +2127,6 @@
         if (!navigator.geolocation) return;
         navigator.geolocation.getCurrentPosition((p) => {
           currentCoords = { lat: p.coords.latitude, lng: p.coords.longitude };
-          map.setView([currentCoords.lat, currentCoords.lng], 14);
-          marker.setLatLng(currentCoords);
           updateCoordInputs();
           toast("Location detected");
           if (document.getElementById("mw-results").style.display === "block")
@@ -2438,7 +2427,6 @@
         });
       }
       window.onload = () => {
-        initMap();
         initFieldCanvas();
         setupAccordionBehavior();
         updateCoordInputs();

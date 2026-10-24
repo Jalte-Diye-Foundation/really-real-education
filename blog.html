@@ -57,7 +57,7 @@
               </p>
             </div>
           </div>
-          <div class="blog-layout" id="journals">
+          <div class="blog-layout" id="poems">
             <nav class="blog-nav">
               <h3>Blog Posts</h3>
               <ul>
@@ -73,23 +73,23 @@
                   <a href="#post-3">Building Community Through Knowledge</a>
                 </li>
               </ul>
-              <h3>Journals</h3>
+              <h3>Poems on JDF philosophy</h3>
               <ul>
                 <li>
-                  <a href="#journal-peace" data-pdf="assets/pdfs/Shanti.pdf"
+                  <a href="#poem-peace" data-pdf="assets/pdfs/Shanti.pdf"
                     >Peace</a
                   >
                 </li>
                 <li>
                   <a
-                    href="#journal-inequalities"
+                    href="#poem-inequalities"
                     data-pdf="assets/pdfs/Rising_inequalities.pdf"
                     >Rising Inequalities</a
                   >
                 </li>
                 <li>
                   <a
-                    href="#journal-jalte-diye"
+                    href="#poem-jalte-diye"
                     data-pdf="assets/pdfs/Jalte_Diye.pdf"
                     >Jalte Diye</a
                   >
@@ -224,11 +224,11 @@
             </article>
             <article
               class="blog-content"
-              id="journal-reader"
+              id="poem-reader"
               style="display: none"
             >
               <div
-                id="journal-pdf-viewer"
+                id="poem-pdf-viewer"
                 class="pdfjs-container"
                 aria-live="polite"
               ></div>
@@ -237,33 +237,33 @@
             <script>
               const links = document.querySelectorAll(".blog-nav a");
               const articles = document.querySelectorAll(".blog-content");
-              const journalReader = document.getElementById("journal-reader");
-              const journalPdfViewer =
-                document.getElementById("journal-pdf-viewer");
+              const poemReader = document.getElementById("poem-reader");
+              const poemPdfViewer =
+                document.getElementById("poem-pdf-viewer");
 
               if (window.pdfjsLib) {
                 pdfjsLib.GlobalWorkerOptions.workerSrc =
                   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
               }
 
-              const renderJournal = async (path) => {
+              const renderPoem = async (path) => {
                 if (!window.pdfjsLib) {
-                  journalPdfViewer.textContent =
+                  poemPdfViewer.textContent =
                     "PDF viewer could not be loaded. Please try again when you are online.";
                   return;
                 }
 
                 try {
-                  journalPdfViewer.textContent = "Loading journal...";
+                  poemPdfViewer.textContent = "Loading poem...";
                   const pdfDoc = await pdfjsLib.getDocument({
                     url: path,
                     disableWorker: window.location.protocol === "file:",
                   }).promise;
                   const viewerWidth = Math.max(
-                    journalPdfViewer.clientWidth,
+                    poemPdfViewer.clientWidth,
                     320,
                   );
-                  journalPdfViewer.innerHTML = "";
+                  poemPdfViewer.innerHTML = "";
 
                   for (
                     let pageNumber = 1;
@@ -288,7 +288,7 @@
                     canvas.style.width = "100%";
                     canvas.style.height = "auto";
                     canvas.style.marginBottom = "16px";
-                    journalPdfViewer.appendChild(canvas);
+                    poemPdfViewer.appendChild(canvas);
 
                     await page.render({
                       canvasContext: context,
@@ -297,8 +297,8 @@
                     }).promise;
                   }
                 } catch {
-                  journalPdfViewer.textContent =
-                    "This journal could not be loaded.";
+                  poemPdfViewer.textContent =
+                    "This poem could not be loaded.";
                 }
               };
 
@@ -310,8 +310,8 @@
                     (article) => (article.style.display = "none"),
                   );
                   if (link.dataset.pdf) {
-                    journalReader.style.display = "block";
-                    await renderJournal(link.dataset.pdf);
+                    poemReader.style.display = "block";
+                    await renderPoem(link.dataset.pdf);
                   } else {
                     const postId = link.getAttribute("href").substring(1);
                     document.getElementById(postId).style.display = "block";
