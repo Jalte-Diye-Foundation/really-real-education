@@ -8,14 +8,14 @@
 
 :root {
   /* Fallback copies in case Nurolab.css is ever loaded standalone */
-  --green: #66b7a0;
-  --magenta: #b7667d;
-  --brown: #b7a066;
-  --blue: #667db7;
-  --ink: #1f2933;
-  --muted: #5b6572;
-  --paper: #f8f9fa;
-  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --green: #1d684c;
+  --magenta: #d62671;
+  --brown: #9b7a43;
+  --blue: #02a2e7;
+  --ink: #344943;
+  --muted: #5f6e68;
+  --paper: #ffffff;
+  --shadow-soft: 0 10px 30px rgba(36, 65, 52, 0.08);
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
@@ -54,8 +54,8 @@
 .hero-tag {
   display: inline-block;
   padding: 8px 18px;
-  background: #eaf8f5;
-  color: #5aa89b;
+  background: rgba(29, 104, 76, 0.1);
+  color: var(--green);
   border-radius: 50px;
   font-size: 12px;
   font-weight: 700;
@@ -72,13 +72,13 @@
 }
 
 .gradient-text {
-  color: #63c3ad;
+  color: var(--green);
 }
 
 .hero-subtitle {
   font-size: 18px;
   line-height: 1.8;
-  color: #5b6572;
+  color: var(--muted);
   max-width: 540px;
   margin-bottom: 32px;
 }
@@ -101,8 +101,8 @@
 }
 
 .pill {
-  background: #e9f7f4;
-  color: #5aa89b;
+  background: rgba(29, 104, 76, 0.1);
+  color: var(--green);
   padding: 8px 16px;
   border-radius: 999px;
   font-size: 14px;
@@ -117,7 +117,7 @@
     width:100%;
     max-width:470px;
     background:#ffffff;
-    border:1px solid rgba(102,183,160,.18);
+    border:1px solid rgba(29,104,76,.18);
     border-radius:28px;
     padding:24px;
     box-shadow:0 18px 45px rgba(0,0,0,.08);
@@ -156,7 +156,7 @@
 
 .wave-wrap{
     background:#fff;
-    border:1px solid rgba(102,183,160,.15);
+    border:1px solid rgba(29,104,76,.15);
     border-radius:16px;
     overflow:hidden;
     height:120px;
@@ -215,7 +215,7 @@
 
 .metric{
     background:#fff;
-    border:1px solid rgba(102,183,160,.15);
+    border:1px solid rgba(29,104,76,.15);
     border-radius:14px;
     padding:14px;
     text-align:center;
@@ -278,7 +278,7 @@
     text-indent: 0;
     font-size: 19px;
     line-height: 1.7;
-    color: #5b6572;
+    color: var(--muted);
 }
 
 .card-title{
@@ -426,7 +426,7 @@
     border-radius:28px;
     background:#fff;
     border:1px solid rgba(0,0,0,.08);
-    border-top: 5px solid #66b7a0;
+    border-top: 5px solid var(--green);
     transition:.35s;
 }
 
@@ -478,7 +478,7 @@
 
 .flow-arrow {
   font-size: 30px;
-  color: #66b7a0;
+  color: var(--green);
   font-weight: bold;
 }
 
@@ -719,7 +719,7 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(102, 183, 160, 0.95), rgba(102, 125, 183, 0.95));
+  background: var(--green);
   color: #ffffff;
   font-weight: 700;
   font-size: 0.95rem;
@@ -773,8 +773,8 @@
 
 .roadmap-item.done {
   border-style: solid;
-  border-color: rgba(102, 183, 160, 0.4);
-  background: rgba(102, 183, 160, 0.07);
+  border-color: rgba(29, 104, 76, 0.4);
+  background: rgba(29, 104, 76, 0.07);
 }
 
 .roadmap-tag {
@@ -785,13 +785,13 @@
   letter-spacing: 0.5px;
   padding: 3px 10px;
   border-radius: 999px;
-  background: rgba(102, 125, 183, 0.15);
+  background: rgba(2, 162, 231, 0.12);
   color: var(--blue);
   margin-bottom: 10px;
 }
 
 .roadmap-item.done .roadmap-tag {
-  background: rgba(102, 183, 160, 0.2);
+  background: rgba(29, 104, 76, 0.12);
   color: var(--green);
 }
 
@@ -815,7 +815,7 @@
     margin-top:70px;
     padding:60px 50px;
     border-radius:28px;
-    background:linear-gradient(135deg, rgba(102,183,160,.95), rgba(102,125,183,.95));
+    background:var(--green);
     display:flex;
     flex-wrap:wrap;
     align-items:center;
@@ -1011,7 +1011,7 @@
 }
 
 .step.active{
-    background:linear-gradient(135deg,#66b7a0,#7d9fd6);
+    background:var(--green);
     color:white;
     border:none;
 }
@@ -1077,9 +1077,9 @@
 }
 
 .nav button:hover{
-    background:#66b7a0;
+    background:var(--green);
     color:white;
-    border-color:#66b7a0;
+    border-color:var(--green);
 }
 
 /* ================================
@@ -1119,7 +1119,7 @@
     padding:14px 30px;
     border:none;
     border-radius:50px;
-    background:linear-gradient(135deg,#66b7a0,#667db7);
+    background:var(--green);
     color:white;
     font-size:16px;
     font-weight:600;
@@ -1129,7 +1129,7 @@
 
 .play-demo-btn:hover{
     transform:translateY(-3px);
-    box-shadow:0 15px 30px rgba(102,183,160,.3);
+    box-shadow:0 15px 30px rgba(29,104,76,.3);
 }
 
 .app-details h3{
@@ -1211,7 +1211,7 @@
 }
 
 .close-video:hover{
-    background:#66b7a0;
+    background:var(--green);
     color:#fff;
     transform:scale(1.1);
 }
@@ -1417,7 +1417,7 @@
    ========================================================================== */
 .app-terminal {
   background: #ffffff;
-  border: 1px solid rgba(102, 183, 160, 0.15);
+  border: 1px solid rgba(29, 104, 76, 0.15);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
   padding: 48px;
@@ -1460,7 +1460,7 @@
   width: 100%;
   max-width: 220px;
   aspect-ratio: 9 / 18;
-  border: 1px dashed rgba(102, 183, 160, 0.35);
+  border: 1px dashed rgba(29, 104, 76, 0.35);
   border-radius: 24px;
   display: flex;
   align-items: center;
@@ -1493,19 +1493,19 @@
 }
 
 .app-terminal .play-demo-btn {
-  background: linear-gradient(135deg, var(--green), var(--blue));
+  background: var(--green);
   border: none;
   color: #ffffff;
   font-family: "Poppins", "Segoe UI", sans-serif;
   font-weight: 600;
   border-radius: 999px;
   padding: 14px 30px;
-  box-shadow: 0 15px 30px rgba(102, 183, 160, 0.25);
+  box-shadow: 0 15px 30px rgba(29, 104, 76, 0.25);
 }
 
 .app-terminal .play-demo-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 18px 36px rgba(102, 183, 160, 0.35);
+  box-shadow: 0 18px 36px rgba(29, 104, 76, 0.35);
 }
 
 @media (max-width: 700px) {
@@ -1553,7 +1553,7 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: rgba(102, 183, 160, 0.12);
+  background: rgba(29, 104, 76, 0.12);
   color: var(--green);
   font-size: 13px;
   font-weight: 700;

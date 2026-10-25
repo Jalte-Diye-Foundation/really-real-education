@@ -21,14 +21,14 @@
         box-sizing: border-box;
       }
       :root {
-        --green: #66b7a0;
-        --magenta: #b7667d;
-        --brown: #b7a066;
-        --blue: #667db7;
-        --ink: #1f2933;
-        --muted: #5b6572;
-        --paper: #f8f9fa;
-        --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+        --green: #1d684c;
+        --magenta: #d62671;
+        --brown: #9b7a43;
+        --blue: #02a2e7;
+        --ink: #344943;
+        --muted: #5f6e68;
+        --paper: #ffffff;
+        --shadow-soft: 0 10px 30px rgba(36, 65, 52, 0.08);
         --radius-lg: 28px;
         --radius-md: 18px;
         --radius-sm: 12px;
@@ -37,13 +37,13 @@
         --bark-mid: var(--muted);
         --moss: var(--green);
         --moss-mid: var(--blue);
-        --moss-lt: rgba(102, 183, 160, 0.15);
+        --moss-lt: rgba(29, 104, 76, 0.1);
         --canopy: var(--paper);
-        --canopy-dark: #f1f3f5;
+        --canopy-dark: #faf8f1;
         --amber: var(--brown);
         --ruby: var(--magenta);
-        --glass: rgba(248, 249, 250, 0.8);
-        --glass-border: rgba(31, 41, 51, 0.08);
+        --glass: rgba(255, 255, 255, 0.94);
+        --glass-border: rgba(52, 73, 67, 0.1);
       }
       body {
         font-family: "Inter", "Segoe UI", sans-serif;
@@ -53,23 +53,13 @@
         background-image:
           radial-gradient(
             circle at 15% 20%,
-            rgba(102, 183, 160, 0.1) 0%,
-            rgba(102, 183, 160, 0) 55%
+            rgba(29, 104, 76, 0.045) 0%,
+            rgba(29, 104, 76, 0) 55%
           ),
           radial-gradient(
             circle at 85% 15%,
-            rgba(183, 102, 125, 0.1) 0%,
-            rgba(183, 102, 125, 0) 55%
-          ),
-          radial-gradient(
-            circle at 20% 80%,
-            rgba(183, 160, 102, 0.1) 0%,
-            rgba(183, 160, 102, 0) 55%
-          ),
-          radial-gradient(
-            circle at 90% 80%,
-            rgba(102, 125, 183, 0.1) 0%,
-            rgba(102, 125, 183, 0) 55%
+            rgba(214, 38, 113, 0.035) 0%,
+            rgba(214, 38, 113, 0) 55%
           );
         line-height: 1.7;
       }
@@ -97,7 +87,7 @@
         letter-spacing: 0.5px;
         padding: 2px 6px;
         border-radius: 999px;
-        background: rgba(102, 125, 183, 0.15);
+        background: rgba(2, 162, 231, 0.12);
         color: var(--blue);
       }
       .hero {
@@ -433,11 +423,7 @@
         cursor: pointer;
       }
       .poly-btn.active {
-        background: linear-gradient(
-          135deg,
-          rgba(102, 183, 160, 0.95),
-          rgba(102, 125, 183, 0.95)
-        );
+        background: var(--green);
         border-color: transparent;
         color: white;
       }
