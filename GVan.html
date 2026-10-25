@@ -301,7 +301,7 @@
       }
       .input-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
         gap: 1rem;
         background: #fefcf8;
         padding: 1rem;
@@ -323,6 +323,9 @@
         border-radius: 20px;
         border: 1px solid #d6dccc;
         background: white;
+      }
+      .analyze-action {
+        align-self: end;
       }
       .analyze-site-btn {
         width: 100%;
@@ -403,29 +406,6 @@
         color: #2c6e2a;
         border-top: 2px solid #d6dccc;
         padding-top: 8px;
-      }
-      #fieldCanvas,
-      #plantationCanvas {
-        width: 100%;
-        height: 340px;
-        background: #fefef8;
-        border-radius: 20px;
-        cursor: crosshair;
-        border: 1px solid #d6dccc;
-        display: block;
-      }
-      .poly-btn {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.9rem;
-        border-radius: 999px;
-        border: 1px solid #d6dccc;
-        background: white;
-        cursor: pointer;
-      }
-      .poly-btn.active {
-        background: var(--green);
-        border-color: transparent;
-        color: white;
       }
       .scheme-grid,
       .helpline-grid {
@@ -567,7 +547,7 @@
         </div>
         <nav class="site-nav">
           <a href="index.html">Home</a><a href="books.html">Books</a
-          ><a href="blog.html">Blogs</a><a href="waking-up.html">Apply</a>
+          ><a href="blog.html">Blogs</a><a href="poems.html">Poems</a>
         </nav>
       </div>
     </header>
@@ -667,7 +647,22 @@
           </div>
           <div>
             <label>Area (sq m)</label
-            ><input type="number" id="mw-area" value="120" />
+            ><input type="number" id="mw-area" value="120" oninput="syncAreaAndRecalc()" />
+          </div>
+          <div>
+            <label
+              >Miyawaki density:
+              <span id="densityValue">4 saplings/m²</span></label
+            ><input
+              type="range"
+              id="densitySlider"
+              min="2"
+              max="6"
+              step="1"
+              value="4"
+              oninput="updateDensityAndSimulate()"
+              style="padding: 0; border: none; background: transparent"
+            />
           </div>
           <div>
             <label>pH</label
@@ -717,8 +712,8 @@
                   >Miyawaki layer distribution (optimized for soil type)</strong
                 ><br /><span id="layer-distribution-details">Loading...</span
                 ><br /><span style="font-size: 0.7rem"
-                  >Total density: 2–6 saplings/m² (adjustable in field
-                  designer)</span
+                  >Total density: 2–6 saplings/m² (adjustable in the
+                  density control)</span
                 >
               </div>
             </div>
@@ -731,32 +726,15 @@
         <h2>Site Preparation & Resource Estimator</h2>
         <div class="resource-grid">
           <div class="sub-card">
-            <div style="display: flex; gap: 12px; margin: 0 0 16px 0">
-              <button
-                onclick="toggleGeometryMode()"
-                style="
-                  background: #2c6e2a;
-                  color: white;
-                  border: none;
-                  border-radius: 40px;
-                  padding: 6px 20px;
-                "
+            <div class="metric-pill">
+              <div style="font-size: 0.7rem">Number of trees (saplings)</div>
+              <div
+                id="polyTrees"
+                style="font-size: 1.5rem; font-weight: 800"
               >
-                Estimate
-              </button>
-            </div>
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px"
-            >
-              <div>
-                <label>Land Area (sq m)</label
-                ><input
-                  type="number"
-                  id="mw-area-input"
-                  value="120"
-                  oninput="syncAreaAndRecalc()"
-                />
+                --
               </div>
+              <div>for the selected land area and density</div>
             </div>
             <div
               style="
@@ -930,92 +908,6 @@
         </div>
       </div>
 
-      <!-- Field Polygon & Plantation Simulator -->
-      <div class="section" id="field-section">
-        <div class="section-header">
-          <h2>Field Polygon & Plantation Layout</h2>
-          <span>Draw boundary → Miyawaki density planting</span>
-        </div>
-        <div class="grid-2">
-          <div class="card">
-            <div class="card-header">Draw Field</div>
-            <div class="card-body" style="padding: 1rem">
-              <canvas id="fieldCanvas" width="600" height="340"></canvas>
-              <div class="canvas-scale">
-                Grid squares = 30px × 30px → 3m × 3m &nbsp; | &nbsp; Scale: 10px
-                ≈ 1m
-              </div>
-              <div
-                style="
-                  display: flex;
-                  gap: 0.5rem;
-                  margin-top: 0.6rem;
-                  flex-wrap: wrap;
-                "
-              >
-                <button
-                  class="poly-btn"
-                  id="drawModeBtn"
-                  onclick="setDrawMode(true)"
-                >
-                  Draw</button
-                ><button class="poly-btn" onclick="clearPolygon()">Clear</button
-                ><button class="poly-btn" onclick="closePolygon()">
-                  Simulate</button
-                ><button class="poly-btn" onclick="loadSampleField()">
-                  Sample Field
-                </button>
-              </div>
-              <div
-                class="spacing-slider"
-                style="
-                  margin-top: 0.8rem;
-                  display: flex;
-                  gap: 0.8rem;
-                  align-items: center;
-                  flex-wrap: wrap;
-                "
-              >
-                <span>Miyawaki density (saplings/m²):</span
-                ><input
-                  type="range"
-                  id="densitySlider"
-                  min="2"
-                  max="6"
-                  step="1"
-                  value="4"
-                  oninput="updateDensityAndSimulate()"
-                /><span id="densityValue">4 saplings/m²</span>
-              </div>
-              <div id="polyInfo" style="font-size: 0.7rem; margin-top: 0.5rem">
-                Click points, close near orange start → Simulate (dense Miyawaki
-                forest)
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header">Plantation Simulator</div>
-            <div class="card-body" style="padding: 1rem">
-              <canvas id="plantationCanvas" width="600" height="340"></canvas>
-              <div
-                style="
-                  margin-top: 0.6rem;
-                  display: grid;
-                  grid-template-columns: 1fr 1fr;
-                  gap: 0.5rem;
-                "
-              >
-                <div>Trees (saplings): <strong id="polyTrees">—</strong></div>
-                <div>Area: <strong id="polyArea">—</strong> m²</div>
-                <div>
-                  Canopy coverage: <strong id="polyCoverage">—</strong>%
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Government Schemes & Helplines -->
       <div class="section">
         <details class="accordion-card">
@@ -1142,8 +1034,10 @@
       </div>
     </main>
     <footer>
-      <div>
-        Built by Jalte Diye Foundation for learners at reallyrealeducation.org.
+      <div class="footer-credit">
+        Built by
+        <a href="https://jaltediyefoundation.org" target="_blank" rel="noopener noreferrer">Jalte Diye Foundation</a>
+        for learners at reallyrealeducation.org.
       </div>
       <div class="footer-links">
         <a href="https://jaltediyefoundation.org" target="_blank"
@@ -1816,15 +1710,7 @@
         return "north_central_arid_plains";
       }
       let currentCoords = { lat: 28.6139, lng: 77.209 },
-        polyPoints = [],
-        polyClosed = false,
-        drawModeActive = true,
-        fieldCanvas,
-        plantCanvas,
-        ctxField,
-        ctxPlant,
         currentDensity = 4,
-        METER_PER_PX = 0.1,
         currentZoneId = "north_central_arid_plains";
 
       function updateLayerDistribution(soilTypeText) {
@@ -1926,6 +1812,7 @@
           };
           updateSpeciesBySoil();
           document.getElementById("mw-results").style.display = "block";
+          calculateIrregularGeometry();
           updateFullBudget();
           document.getElementById("mw-loading").style.display = "none";
         }, 100);
@@ -1948,9 +1835,7 @@
 
       function updateFullBudget() {
         let area =
-          parseFloat(document.getElementById("mw-area").value) ||
-          parseFloat(document.getElementById("mw-area-input").value) ||
-          100;
+          parseFloat(document.getElementById("mw-area").value) || 100;
         let density = currentDensity,
           ph = parseFloat(document.getElementById("mw-ph").value) || 6.5;
         let soilEnh = getCurrentSoilEnhancer();
@@ -2127,21 +2012,20 @@
       }
       function calculateIrregularGeometry() {
         let area =
-          parseFloat(document.getElementById("mw-area-input").value) || 0;
+          parseFloat(document.getElementById("mw-area").value) || 0;
+        updateTreeCount();
         let perimeter = Math.round(4 * Math.sqrt(area) * 1.25);
         document.getElementById("mw-perimeter").innerText = perimeter + " m";
         let fencingCost = perimeter * 150;
         document.getElementById("mw-fencing-cost").innerHTML =
           "₹" + fencingCost.toLocaleString();
-        if (document.getElementById("mw-area"))
-          document.getElementById("mw-area").value = area;
         if (document.getElementById("mw-results").style.display === "block") {
           updateWaterRequirement();
           updateFullBudget();
         }
       }
       function syncAreaAndRecalc() {
-        let area = parseFloat(document.getElementById("mw-area-input").value);
+        let area = parseFloat(document.getElementById("mw-area").value);
         if (!isNaN(area)) {
           document.getElementById("mw-area").value = area;
           calculateIrregularGeometry();
@@ -2150,14 +2034,13 @@
             updateFullBudget();
           }
           simulateForestGrowth();
-          if (polyClosed) renderPlantation();
         }
       }
       function simulateForestGrowth() {
         let y = parseInt(document.getElementById("mw-year-slider").value);
         document.getElementById("mw-year-label").innerText = `Year ${y}`;
         let area =
-          parseFloat(document.getElementById("mw-area-input").value) || 100;
+          parseFloat(document.getElementById("mw-area").value) || 100;
         let totalCO2kg = area * 12 * Math.min(y / 5, 2.5);
         let tons = totalCO2kg / 1000;
         document.getElementById("mw-co2-output").innerHTML =
@@ -2183,221 +2066,22 @@
           .map((e) => `<li>${e}</li>`)
           .join("");
       }
-      function initFieldCanvas() {
-        fieldCanvas = document.getElementById("fieldCanvas");
-        plantCanvas = document.getElementById("plantationCanvas");
-        ctxField = fieldCanvas.getContext("2d");
-        ctxPlant = plantCanvas.getContext("2d");
-        fieldCanvas.addEventListener("click", (e) => {
-          if (drawModeActive && !polyClosed) addPolygonPoint(e);
-        });
-        clearPolygon();
-        setDrawMode(true);
-        document
-          .getElementById("densitySlider")
-          .addEventListener("input", (e) => {
-            currentDensity = parseFloat(e.target.value);
-            document.getElementById("densityValue").innerText =
-              currentDensity + " saplings/m²";
-            if (polyClosed) renderPlantation();
-            if (document.getElementById("mw-results").style.display === "block")
-              updateFullBudget();
-          });
-      }
-      function setDrawMode(mode) {
-        drawModeActive = mode;
-        document.getElementById("drawModeBtn").classList.toggle("active", mode);
-      }
-      function addPolygonPoint(e) {
-        let rect = fieldCanvas.getBoundingClientRect(),
-          scaleX = fieldCanvas.width / rect.width,
-          scaleY = fieldCanvas.height / rect.height;
-        let x = (e.clientX - rect.left) * scaleX,
-          y = (e.clientY - rect.top) * scaleY;
-        polyPoints.push({ x, y });
-        drawPolygonPreview();
-      }
-      function drawPolygonPreview() {
-        ctxField.clearRect(0, 0, fieldCanvas.width, fieldCanvas.height);
-        drawGridBg(ctxField);
-        if (polyPoints.length === 0) return;
-        ctxField.beginPath();
-        ctxField.moveTo(polyPoints[0].x, polyPoints[0].y);
-        for (let p of polyPoints) ctxField.lineTo(p.x, p.y);
-        ctxField.strokeStyle = "#2c6e2a";
-        ctxField.lineWidth = 2.5;
-        ctxField.stroke();
-        for (let p of polyPoints) {
-          ctxField.fillStyle = "#c97a2f";
-          ctxField.beginPath();
-          ctxField.arc(p.x, p.y, 5, 0, 2 * Math.PI);
-          ctxField.fill();
-        }
-        if (polyPoints.length > 2) {
-          ctxField.fillStyle = "#ffa500";
-          ctxField.beginPath();
-          ctxField.arc(polyPoints[0].x, polyPoints[0].y, 7, 0, 2 * Math.PI);
-          ctxField.fill();
-        }
-      }
-      function drawGridBg(ctx) {
-        ctx.fillStyle = "#fefef5";
-        ctx.fillRect(0, 0, fieldCanvas.width, fieldCanvas.height);
-        ctx.strokeStyle = "#d6dccc";
-        ctx.lineWidth = 0.5;
-        for (let i = 0; i < fieldCanvas.width; i += 30) {
-          ctx.beginPath();
-          ctx.moveTo(i, 0);
-          ctx.lineTo(i, fieldCanvas.height);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(0, i);
-          ctx.lineTo(fieldCanvas.width, i);
-          ctx.stroke();
-        }
-      }
-      function clearPolygon() {
-        polyPoints = [];
-        polyClosed = false;
-        drawPolygonPreview();
-        ctxPlant.clearRect(0, 0, plantCanvas.width, plantCanvas.height);
-        document.getElementById("polyTrees").innerText = "—";
-        document.getElementById("polyArea").innerText = "—";
-        document.getElementById("polyCoverage").innerText = "—";
-      }
-      function closePolygon() {
-        if (polyPoints.length < 3) {
-          toast("Need at least 3 points");
-          return;
-        }
-        polyClosed = true;
-        drawPolygonPreview();
-        updateAreaFromPolygon();
-        renderPlantation();
-        toast("Polygon simulated – area updated.");
-      }
-      function loadSampleField() {
-        polyPoints = [
-          { x: fieldCanvas.width * 0.2, y: fieldCanvas.height * 0.3 },
-          { x: fieldCanvas.width * 0.8, y: fieldCanvas.height * 0.25 },
-          { x: fieldCanvas.width * 0.9, y: fieldCanvas.height * 0.65 },
-          { x: fieldCanvas.width * 0.55, y: fieldCanvas.height * 0.85 },
-          { x: fieldCanvas.width * 0.25, y: fieldCanvas.height * 0.75 },
-        ];
-        polyClosed = true;
-        drawPolygonPreview();
-        updateAreaFromPolygon();
-        renderPlantation();
-        toast("Sample field loaded – area updated.");
-      }
-      function updateAreaFromPolygon() {
-        let areaPx = polygonAreaInPixels(polyPoints);
-        let areaSqM = areaPx * (METER_PER_PX * METER_PER_PX);
-        document.getElementById("polyArea").innerText = areaSqM.toFixed(1);
-        document.getElementById("mw-area-input").value = areaSqM.toFixed(1);
-        document.getElementById("mw-area").value = areaSqM.toFixed(1);
-        calculateIrregularGeometry();
-        if (document.getElementById("mw-results").style.display === "block") {
-          updateWaterRequirement();
-          updateFullBudget();
-        }
-        simulateForestGrowth();
-        let treeCount = Math.round(areaSqM * currentDensity);
-        document.getElementById("polyTrees").innerText = treeCount;
-        let canopyCoverage = Math.min(
-          95,
-          ((treeCount * Math.PI * (1.5 * 1.5)) / areaSqM) * 100,
-        );
-        document.getElementById("polyCoverage").innerText =
-          canopyCoverage.toFixed(1);
-      }
-      function polygonAreaInPixels(poly) {
-        let area = 0;
-        for (let i = 0; i < poly.length; i++) {
-          let j = (i + 1) % poly.length;
-          area += poly[i].x * poly[j].y;
-          area -= poly[j].x * poly[i].y;
-        }
-        return Math.abs(area) / 2;
-      }
-      function pointInPolygon(px, py, poly) {
-        let inside = false;
-        for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-          let xi = poly[i].x,
-            yi = poly[i].y,
-            xj = poly[j].x,
-            yj = poly[j].y;
-          let intersect =
-            yi > py != yj > py && px < ((xj - xi) * (py - yi)) / (yj - yi) + xi;
-          if (intersect) inside = !inside;
-        }
-        return inside;
-      }
-      function renderPlantation() {
-        if (!polyClosed || polyPoints.length < 3) return;
-        ctxPlant.clearRect(0, 0, plantCanvas.width, plantCanvas.height);
-        drawGridBg(ctxPlant);
-        ctxPlant.beginPath();
-        ctxPlant.moveTo(polyPoints[0].x, polyPoints[0].y);
-        for (let p of polyPoints) ctxPlant.lineTo(p.x, p.y);
-        ctxPlant.closePath();
-        ctxPlant.fillStyle = "rgba(44,110,42,0.08)";
-        ctxPlant.fill();
-        ctxPlant.strokeStyle = "#2c6e2a";
-        ctxPlant.lineWidth = 2;
-        ctxPlant.stroke();
-        let areaSqM =
-          parseFloat(document.getElementById("mw-area-input").value) || 0;
-        let approxPlants = Math.round(areaSqM * currentDensity);
-        let spacingPx = Math.sqrt(areaSqM / approxPlants) / METER_PER_PX;
-        if (spacingPx < 5) spacingPx = 5;
-        let bbox = {
-          minX: Math.min(...polyPoints.map((p) => p.x)),
-          maxX: Math.max(...polyPoints.map((p) => p.x)),
-          minY: Math.min(...polyPoints.map((p) => p.y)),
-          maxY: Math.max(...polyPoints.map((p) => p.y)),
-        };
-        for (let y = bbox.minY + spacingPx / 2; y < bbox.maxY; y += spacingPx) {
-          for (
-            let x = bbox.minX + spacingPx / 2;
-            x < bbox.maxX;
-            x += spacingPx
-          ) {
-            if (pointInPolygon(x, y, polyPoints)) {
-              ctxPlant.fillStyle = "#2c6e2a";
-              ctxPlant.beginPath();
-              ctxPlant.arc(x, y, 5, 0, 2 * Math.PI);
-              ctxPlant.fill();
-              ctxPlant.fillStyle = "#8fb870";
-              ctxPlant.beginPath();
-              ctxPlant.arc(x, y, 3, 0, 2 * Math.PI);
-              ctxPlant.fill();
-            }
-          }
-        }
-        let actualTreeCount = Math.round(areaSqM * currentDensity);
-        document.getElementById("polyTrees").innerText = actualTreeCount;
-        let canopyCoverage = Math.min(
-          95,
-          ((actualTreeCount * Math.PI * (1.5 * 1.5)) / areaSqM) * 100,
-        );
-        document.getElementById("polyCoverage").innerText =
-          canopyCoverage.toFixed(1);
+      function updateTreeCount() {
+        let area =
+          parseFloat(document.getElementById("mw-area").value) || 0;
+        document.getElementById("densityValue").innerText =
+          currentDensity + " saplings/m²";
+        document.getElementById("polyTrees").innerText = Math.round(
+          area * currentDensity,
+        ).toLocaleString("en-IN");
       }
       function updateDensityAndSimulate() {
         currentDensity = parseFloat(
           document.getElementById("densitySlider").value,
         );
-        document.getElementById("densityValue").innerText =
-          currentDensity + " saplings/m²";
-        if (polyClosed) {
-          renderPlantation();
-          if (document.getElementById("mw-results").style.display === "block")
-            updateFullBudget();
-        }
-      }
-      function toggleGeometryMode() {
-        calculateIrregularGeometry();
+        updateTreeCount();
+        if (document.getElementById("mw-results").style.display === "block")
+          updateFullBudget();
       }
       function setupAccordionBehavior() {
         const accordions = document.querySelectorAll(
@@ -2413,14 +2097,10 @@
         });
       }
       window.onload = () => {
-        initFieldCanvas();
         setupAccordionBehavior();
         updateCoordInputs();
         calculateIrregularGeometry();
         simulateForestGrowth();
-        document
-          .getElementById("mw-area-input")
-          .addEventListener("input", syncAreaAndRecalc);
         toast(
           "Integrated resource hub ready — single budget, dynamic layer distribution.",
         );
@@ -2428,13 +2108,8 @@
       window.searchLocation = searchLocation;
       window.detectLocation = detectLocation;
       window.analyzeSite = analyzeSite;
-      window.toggleGeometryMode = toggleGeometryMode;
       window.calculateIrregularGeometry = calculateIrregularGeometry;
       window.simulateForestGrowth = simulateForestGrowth;
-      window.setDrawMode = setDrawMode;
-      window.clearPolygon = clearPolygon;
-      window.closePolygon = closePolygon;
-      window.loadSampleField = loadSampleField;
       window.syncAreaAndRecalc = syncAreaAndRecalc;
       window.updateDensityAndSimulate = updateDensityAndSimulate;
     </script>

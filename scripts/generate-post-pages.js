@@ -97,8 +97,7 @@ function renderPostPage(post) {
                 <nav class="site-nav">
                     <a href="../index.html">Home</a>
                     <a href="../books.html">Books</a>
-                    <a href="../blog.html">Blogs</a>
-                  <a href="../waking-up.html">Apply</a>
+                    <a href="../blog.html">Blogs</a>
                 </nav>
             </div>
         </header>
@@ -127,11 +126,11 @@ function renderPostPage(post) {
                     <img class="post-image"
 src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" loading="eager">
                     <div class="post-body">
-                        <h2 class="post-title">${escapeHtml(post.title || fallbackTitle)}</h2>
+                        <p class="card-meta">Date: ${escapeHtml(formatDate(post.date))}</p>
                         ${post.theme ? `<p class="card-meta">Theme: ${escapeHtml(post.theme)}</p>` : ""}${isMeaningfulEvent(post.event_name || post.event) ? `
                         <p class="card-meta">Event: ${escapeHtml(String(post.event_name || post.event).trim())}</p>` : ""}
-                        <p class="card-meta">Last updated: ${escapeHtml(formatDate(post.date))}</p>
                         <p class="post-excerpt">${escapeHtml(description)}</p>
+                        <h2 class="post-title">${escapeHtml(post.title || fallbackTitle)}</h2>
                         ${formattedLongExplanation ? `<div class="post-long-explanation-block"><p class="post-long-explanation">${formattedLongExplanation}</p></div>` : ""}
                         ${hashtagsText ? `<p class="post-hashtags">${escapeHtml(hashtagsText)}</p>` : ""}
                     </div>
@@ -140,7 +139,7 @@ src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" loading="eager">
         </main>
 
         <footer class="footer">
-            <div>Built by Jalte Diye Foundation for Learners at reallyrealeducation.org.</div>
+            <div class="footer-credit">Built by <a href="https://jaltediyefoundation.org" target="_blank" rel="noopener noreferrer">Jalte Diye Foundation</a> for Learners at reallyrealeducation.org.</div>
             <div class="footer-links">
                 <a href="https://jaltediyefoundation.org" target="_blank" rel="noopener noreferrer">Privacy &amp; Terms</a>
                 <a href="../compliance.html">Compliance</a>

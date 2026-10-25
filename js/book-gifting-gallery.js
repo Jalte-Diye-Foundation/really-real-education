@@ -6,6 +6,31 @@ const isValidName = (name) =>
   name === name.split(/[\\/]/).pop();
 
 let lightbox;
+const registry = new Map();
+
+const slug = (name) =>
+  name
+    .replace(/\.[^.]+$/, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+const setHash = (id) => {
+  const url = id
+    ? `#${id}`
+    : window.location.pathname + window.location.search;
+  history.replaceState(null, "", url);
+};
+
+const openFromHash = () => {
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  const entry = registry.get(id);
+  if (!entry || (lightbox && !lightbox.isHidden() && lightbox.currentId() === id)) {
+    return;
+  }
+  entry.open();
+  entry.card.scrollIntoView({ block: "center" });
+};
 
 const getLightbox = () => {
   if (lightbox) return lightbox;
@@ -31,15 +56,28 @@ const getLightbox = () => {
   const closeButton = makeButton("lightbox-close", "Close", "\u00D7");
   const prevButton = makeButton("lightbox-prev", "Previous photo", "\u2039");
   const nextButton = makeButton("lightbox-next", "Next photo", "\u203A");
-  overlay.append(image, closeButton, prevButton, nextButton);
+  const shareButton = makeButton("lightbox-share", "Copy link", "Copy link");
+  overlay.append(image, closeButton, prevButton, nextButton, shareButton);
   document.body.appendChild(overlay);
 
   let items = [];
   let index = 0;
 
+  shareButton.addEventListener("click", async () => {
+    const url = `${window.location.origin}${window.location.pathname}#${items[index].id}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      shareButton.textContent = "Link copied!";
+    } catch {
+      window.prompt("Copy this link:", url);
+    }
+    setTimeout(() => (shareButton.textContent = "Copy link"), 1800);
+  });
+
   const render = () => {
     image.src = items[index].src;
     image.alt = items[index].alt;
+    setHash(items[index].id);
     const multiple = items.length > 1;
     prevButton.hidden = !multiple;
     nextButton.hidden = !multiple;
@@ -51,6 +89,7 @@ const getLightbox = () => {
   const close = () => {
     overlay.hidden = true;
     document.body.style.overflow = "";
+    setHash("");
   };
 
   closeButton.addEventListener("click", close);
@@ -67,6 +106,8 @@ const getLightbox = () => {
   });
 
   lightbox = {
+    isHidden: () => overlay.hidden,
+    currentId: () => items[index]?.id,
     open(newItems, startIndex) {
       items = newItems;
       index = startIndex;
@@ -91,6 +132,8 @@ const createImage = (gallery, directory, name) => {
 const createSingleCard = (gallery, directory, name) => {
   const card = document.createElement("article");
   card.className = "book-card fade-up";
+  const id = `${gallery.dataset.sharePrefix}-${slug(name)}`;
+  card.id = id;
   const cover = document.createElement("div");
   cover.className = "book-cover";
   const image = createImage(gallery, directory, name);
@@ -103,10 +146,11 @@ const createSingleCard = (gallery, directory, name) => {
   if (image.complete) {
     markLandscape();
   }
+  const open = () =>
+    getLightbox().open([{ src: image.src, alt: image.alt, id }], 0);
+  registry.set(id, { card, open });
   cover.classList.add("is-zoomable");
-  cover.addEventListener("click", () =>
-    getLightbox().open([{ src: image.src, alt: image.alt }], 0),
-  );
+  cover.addEventListener("click", open);
   cover.appendChild(image);
   card.appendChild(cover);
   return card;
@@ -121,9 +165,26 @@ const createSlideshowCard = (gallery, directory, names) => {
     const image = createImage(gallery, directory, name);
     image.classList.add("slide");
     image.classList.toggle("is-active", index === 0);
+    image.dataset.shareId = `${gallery.dataset.sharePrefix}-${slug(name)}`;
     cover.appendChild(image);
     return image;
   });
+  card.id = slides[0].dataset.shareId;
+  const lightboxItems = () =>
+    slides.map((slide) => ({
+      src: slide.src,
+      alt: slide.alt,
+      id: slide.dataset.shareId,
+    }));
+  slides.forEach((slide, i) =>
+    registry.set(slide.dataset.shareId, {
+      card,
+      open: () => {
+        show(i);
+        getLightbox().open(lightboxItems(), i);
+      },
+    }),
+  );
 
   let current = 0;
   const dots = [];
@@ -160,10 +221,7 @@ const createSlideshowCard = (gallery, directory, names) => {
   cover.classList.add("is-zoomable");
   cover.addEventListener("click", (event) => {
     if (event.target.closest("button")) return;
-    getLightbox().open(
-      slides.map((slide) => ({ src: slide.src, alt: slide.alt })),
-      current,
-    );
+    getLightbox().open(lightboxItems(), current);
   });
 
   cover.append(
@@ -218,6 +276,7 @@ document.querySelectorAll("[data-image-manifest]").forEach((gallery) => {
 
       if (cards.length > 0) {
         gallery.replaceChildren(...cards);
+        openFromHash();
       }
     })
     .catch((error) => {
@@ -225,3 +284,22 @@ document.querySelectorAll("[data-image-manifest]").forEach((gallery) => {
       gallery.textContent = "Photos could not be loaded. Please try again later.";
     });
 });
+
+document.querySelectorAll(".book-grid .book-card").forEach((card) => {
+  const image = card.querySelector(".book-cover-image");
+  const cover = card.querySelector(".book-cover");
+  if (!image || !cover) return;
+  const id = `book-${slug(image.getAttribute("src").split("/").pop())}`;
+  card.id = id;
+  const open = () =>
+    getLightbox().open(
+      [{ src: image.currentSrc || image.src, alt: image.alt, id }],
+      0,
+    );
+  registry.set(id, { card, open });
+  cover.classList.add("is-zoomable");
+  cover.addEventListener("click", open);
+});
+
+window.addEventListener("hashchange", openFromHash);
+openFromHash();

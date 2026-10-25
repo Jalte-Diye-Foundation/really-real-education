@@ -198,11 +198,11 @@
              <img class="post-image"
 src="${escapeHtml(post.image)}"alt="${escapeHtml(post.title)}" loading="lazy">
             <div class="post-body">
-              <h2 class="post-title">${escapeHtml(post.title || `Daily Quote ${getQuoteNumber(post)}`)}</h2>
+              <p class="card-meta">Date: ${escapeHtml(formatDate(post.date))}</p>
               ${post.theme ? `<p class="card-meta">Theme: ${escapeHtml(post.theme)}</p>` : ""}
               ${isMeaningfulEvent(post.event_name || post.event) ? `<p class="card-meta">Event: ${escapeHtml(String(post.event_name || post.event).trim())}</p>` : ""}
-              <p class="card-meta">Last updated: ${escapeHtml(formatDate(post.date))}</p>
               <p class="post-excerpt">${escapeHtml(post.excerpt)}</p>
+              <h2 class="post-title">${escapeHtml(post.title || `Daily Quote ${getQuoteNumber(post)}`)}</h2>
               ${formattedLongExplanation ? `<div class="post-long-explanation-block"><p class="post-long-explanation">${formattedLongExplanation}</p></div>` : ""}
               ${hashtagsText ? `<p class="post-hashtags">${escapeHtml(hashtagsText)}</p>` : ""}
               <div class="post-actions">
