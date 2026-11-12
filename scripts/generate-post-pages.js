@@ -85,6 +85,7 @@ function renderPostPage(post) {
     <link rel="canonical" href="${escapeHtml(permalink)}">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" href="../assets/images/our mission.png" type="image/x-icon">
+<script src="../js/theme.js"></script>
 </head>
 <body>
     <div class="page">
