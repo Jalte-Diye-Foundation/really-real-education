@@ -23,6 +23,18 @@
         String(btns[i].getAttribute("data-set") === theme),
       );
     }
+    var imgs = document.querySelectorAll(
+      'img[src*="logo-black.png"],img[src*="logo-white.png"]',
+    );
+    for (var j = 0; j < imgs.length; j++) {
+      var src = imgs[j].getAttribute("src");
+      imgs[j].setAttribute(
+        "src",
+        theme === "dark"
+          ? src.replace("logo-black.png", "logo-white.png")
+          : src.replace("logo-white.png", "logo-black.png"),
+      );
+    }
   }
 
   function storedZoom() {
@@ -48,6 +60,9 @@
       wrap.style.zoom = zoom === 100 ? "" : String(100 / zoom);
       wrap.querySelector(".tt-zout").disabled = zoom <= ZMIN;
       wrap.querySelector(".tt-zin").disabled = zoom >= ZMAX;
+      var reset = wrap.querySelector(".tt-zreset");
+      reset.textContent = zoom + "%";
+      reset.disabled = zoom === 100;
     }
   }
 
@@ -65,6 +80,7 @@
     // Dark mode inverts the whole page, then re-inverts media so it looks natural.
     'html[data-theme="dark"]{background:#fff;filter:invert(1) hue-rotate(180deg)}' +
     'html[data-theme="dark"] img,html[data-theme="dark"] video,html[data-theme="dark"] canvas,html[data-theme="dark"] iframe,html[data-theme="dark"] .theme-toggle{filter:invert(1) hue-rotate(180deg)}' +
+    'html[data-theme="dark"] .pdfjs-container canvas,html[data-theme="dark"] #pdf-render{filter:none}' +
     ".theme-toggle{position:fixed;right:12px;bottom:12px;z-index:2147483000;display:flex;gap:6px;padding:5px;border-radius:999px;background:rgba(128,128,128,.25);backdrop-filter:blur(4px)}" +
     ".theme-toggle button{width:18px;height:18px;padding:0;border-radius:50%;border:2px solid #888;cursor:pointer;opacity:.7}" +
     ".theme-toggle button:hover,.theme-toggle button[aria-pressed=true]{opacity:1}" +
@@ -99,6 +115,7 @@
     });
     [
       ["tt-zout", "A\u2212", "Decrease text size", -ZSTEP],
+      ["tt-zreset", "100%", "Reset text size to 100%", 0],
       ["tt-zin", "A+", "Increase text size", ZSTEP],
     ].forEach(function (z) {
       var b = document.createElement("button");
@@ -108,7 +125,7 @@
       b.setAttribute("aria-label", z[2]);
       b.title = z[2];
       b.addEventListener("click", function () {
-        applyZoom(zoom + z[3]);
+        applyZoom(z[3] ? zoom + z[3] : 100);
       });
       wrap.appendChild(b);
     });
